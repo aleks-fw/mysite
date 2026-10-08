@@ -335,7 +335,7 @@ requestAnimationFrame(tick);
    РАЗДЕЛЫ: весь сайт в одном документе, поэтому музыка не прерывается при переходах
    ===================================================== */
 const navLinks = [...document.querySelectorAll(".nav__a")];
-const TITLES = { home: "FOPKA", portfolio: "Портфолио — FOPKA", mcp: "MCP — FOPKA", support: "Поддержка — FOPKA", game: "Игра — FOPKA" };
+const TITLES = { home: "NYAN", portfolio: "Портфолио — NYAN", mcp: "MCP — NYAN", support: "Поддержка — NYAN", game: "Игра — NYAN" };
 let view = "home";
 
 const routeFromHash = () => {

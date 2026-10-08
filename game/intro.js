@@ -15,7 +15,7 @@
         '<rect class="base" x="44" y="62" width="72" height="3"/>' +                                                                                // основание ноутбука
         '<rect class="mouse" x="126" y="68" width="7" height="10"/><rect class="mouse2" x="129" y="68" width="1" height="4"/>' +                      // мышь
         '<g class="deskglasses"><rect x="136" y="70" width="6" height="3"/><rect x="144" y="70" width="6" height="3"/><rect x="142" y="71" width="2" height="1"/></g></svg></div>' + // очки на столе
-      '<div class="intro__screen"><div class="intro__page"><div class="intro__bar"><b>fopka<i></i>fm</b><span></span><span></span><span></span></div>' +
+      '<div class="intro__screen"><div class="intro__page"><div class="intro__bar"><b>nyan<i></i>fm</b><span></span><span></span><span></span></div>' +
         '<div class="intro__hero">я <mark>ПРОГРАММИСТ</mark>,<br>пишу САЙТЫ</div></div></div>' +
       '<svg class="intro__grab" viewBox="0 0 40 30" shape-rendering="crispEdges" aria-hidden="true"><rect class="hand" x="14" y="14" width="14" height="16"/><rect class="hand" x="10" y="16" width="5" height="8"/>' +
         '<g class="gl"><rect x="4" y="8" width="13" height="8" fill="none"/><rect x="23" y="8" width="13" height="8" fill="none"/><rect x="17" y="10" width="6" height="2"/></g></svg>' +

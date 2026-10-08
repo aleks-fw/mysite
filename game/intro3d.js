@@ -14,7 +14,7 @@
     g.scale(k, k);
     g.fillStyle = bg; g.fillRect(0, 0, 1024, 640);
     g.fillStyle = bg2; g.fillRect(0, 0, 1024, 64); g.fillStyle = line; g.fillRect(0, 62, 1024, 4);
-    g.fillStyle = text; g.font = "800 34px Onest, system-ui, sans-serif"; g.textBaseline = "middle"; g.fillText("fopka", 28, 33);
+    g.fillStyle = text; g.font = "800 34px Onest, system-ui, sans-serif"; g.textBaseline = "middle"; g.fillText("nyan", 28, 33);
     g.fillStyle = pink; g.fillRect(132, 21, 13, 22); g.fillStyle = text; g.fillText("fm", 152, 33);
     [0, 1, 2].forEach((i) => { g.fillStyle = line; g.fillRect(780 + i * 78, 29, 60, 8); });
     g.font = "800 92px Onest, system-ui, sans-serif"; g.fillStyle = text; g.fillText("я", 70, 250);
