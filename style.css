@@ -334,7 +334,7 @@ h1 { font-weight: 800; font-size: clamp(38px, 4.7vw, 84px); line-height: 1.12; l
 
 /* бургер-кнопка (видна только на телефоне): радуга Nyan — три цветные полоски и искры.
    Закрыто: полоски «бегут» волной. Открыто: розовая и голубая сходятся в крестик, оранжевая улетает вправо */
-.burger { display: none; flex: none; position: relative; width: 52px; height: 46px; padding: 0; border: 2px solid var(--line); background: transparent; color: var(--text); cursor: pointer; align-items: center; justify-content: center; transition: background .2s steps(3), border-color .2s steps(3); }
+.burger { display: none; flex: none; position: relative; width: 52px; height: 46px; padding: 0; border: 0; background: transparent; color: var(--text); cursor: pointer; align-items: center; justify-content: center; }
 .burger:focus-visible { outline: 3px solid var(--orange); outline-offset: 3px; }
 .burger span { position: absolute; left: 10px; right: 10px; height: 5px; outline: 2px solid var(--ink-d); transition: transform .3s steps(5), opacity .2s steps(3), top .3s steps(5); animation: nyanwave 1.3s steps(2) infinite; }
 .burger span:nth-child(1) { top: 9px; background: #ec6a9d; }
@@ -346,8 +346,7 @@ h1 { font-weight: 800; font-size: clamp(38px, 4.7vw, 84px); line-height: 1.12; l
 .burger::before { right: 4px; top: 3px; background: #ff8a1f; box-shadow: 3px 0 #ff8a1f, -3px 0 #ff8a1f, 0 3px #ff8a1f, 0 -3px #ff8a1f; }
 .burger::after { left: 5px; bottom: 4px; background: #3ec8d8; box-shadow: 3px 0 #3ec8d8, -3px 0 #3ec8d8, 0 3px #3ec8d8, 0 -3px #3ec8d8; animation-delay: .8s; }
 @keyframes nyanspark { 0%, 49% { opacity: 1; } 50%, 100% { opacity: 0; } }
-.top.is-open .burger { background: var(--block); border-color: var(--block); }
-.top.is-open .burger span { animation: none; outline-color: transparent; translate: 0 0; }
+.top.is-open .burger span { animation: none; translate: 0 0; }
 .top.is-open .burger span:nth-child(1) { top: 20px; transform: rotate(45deg); }
 .top.is-open .burger span:nth-child(2) { transform: translateX(24px) scaleX(.2); opacity: 0; }
 .top.is-open .burger span:nth-child(3) { top: 20px; transform: rotate(-45deg); }
