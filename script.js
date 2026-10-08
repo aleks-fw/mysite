@@ -5,7 +5,7 @@
    Никаких файлов, всё синтезируется кодом.
    ===================================================== */
 const MINOR = [0, 2, 3, 5, 7, 8, 10];
-const TRACKS = FopkaTracks.TRACKS;
+const TRACKS = NyanTracks.TRACKS;
 const BARS = 16;
 const STEPS = BARS * 16;
 
@@ -68,7 +68,7 @@ const RATES = [0.5, 0.75, 1, 1.25, 1.5, 2];
 const MODES = ["repeat", "order", "random"];
 const MODE_NAMES = { repeat: "Повтор трека", order: "По порядку", random: "Случайно" };
 let mode = "repeat";
-try { const m = localStorage.getItem("fopka-play-mode"); if (MODES.includes(m)) mode = m; } catch (e) {}
+try { const m = localStorage.getItem("nyan-play-mode"); if (MODES.includes(m)) mode = m; } catch (e) {}
 
 function initAudio() {
   ctx = new (window.AudioContext || window.webkitAudioContext)();
@@ -266,7 +266,7 @@ function updateModeUi(animate) {
 function setMode(m) {
   if (!MODES.includes(m) || m === mode) return;
   mode = m;
-  try { localStorage.setItem("fopka-play-mode", mode); } catch (e) {}
+  try { localStorage.setItem("nyan-play-mode", mode); } catch (e) {}
   updateModeUi(true);
   window.dispatchEvent(new Event("musicchange"));
 }
@@ -302,11 +302,11 @@ $("miniClose").addEventListener("click", async () => {
   updateMini();
 });
 
-window.FopkaMusic = {
+window.NyanMusic = {
   tracks: TRACKS,
   current: () => cur,
   isPlaying: () => playing,
-  select: (i) => go(FopkaTracks.wrap(i, TRACKS.length)),
+  select: (i) => go(NyanTracks.wrap(i, TRACKS.length)),
   toggle: () => toggle(),
   next: () => go(cur + 1),
   prev: () => go(cur - 1),
@@ -371,7 +371,7 @@ function applyRoute(initial) {
   }
   updateNav();
   updateMini();
-  if (window.FopkaLobby) { if (v === "game") FopkaLobby.enter(); else FopkaLobby.exit(); }
+  if (window.NyanLobby) { if (v === "game") NyanLobby.enter(); else NyanLobby.exit(); }
 }
 window.addEventListener("hashchange", () => applyRoute(false));
 window.addEventListener("langchange", () => { document.title = tr(TITLES[view]); });

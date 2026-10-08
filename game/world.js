@@ -293,5 +293,5 @@
       dispose() { removeStars(); removeShip(); removeParts(); removeNeb(); removeTrail(); removeWarp(); eng.camera.fov = eng.camera.aspect < 0.8 ? 72 : 55; eng.camera.updateProjectionMatrix(); disposables.forEach((d) => d.dispose && d.dispose()); }
     };
   }
-  root.FopkaWorld = { create, iconURL: (type) => paintIcon(type).toDataURL() };
+  root.NyanWorld = { create, iconURL: (type) => paintIcon(type).toDataURL() };
 })(window);

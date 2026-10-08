@@ -43,7 +43,7 @@
     api.active = true; routed = false;
     return new Promise((resolve) => {
       done = resolve; el = build(); document.body.appendChild(el);
-      const F = root.FopkaIntro3D;
+      const F = root.NyanIntro3D;
       if (!reduce() && F && F.supported()) {
         try {
           let r = F.take(); if (!r) { F.prepare(); r = F.take(); }
@@ -61,11 +61,11 @@
     });
   }
   // готовим 3D-сцену заранее: при наведении, фокусе или касании пункта «Игра»
-  const warm = (e) => { const F = root.FopkaIntro3D; if (F && !reduce() && e.target.closest && e.target.closest("#gameLink") && F.supported()) setTimeout(F.prepare, 0); };
+  const warm = (e) => { const F = root.NyanIntro3D; if (F && !reduce() && e.target.closest && e.target.closest("#gameLink") && F.supported()) setTimeout(F.prepare, 0); };
   ["pointerover", "focusin", "touchstart"].forEach((n) => document.addEventListener(n, warm, { passive: true }));
   document.addEventListener("click", (e) => {
     const a = e.target.closest && e.target.closest("#gameLink"); if (!a || e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey) return;
     if (location.hash === "#/game") return; e.preventDefault(); play();
   });
-  root.FopkaIntro = api;
+  root.NyanIntro = api;
 })(window);

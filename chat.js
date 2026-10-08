@@ -14,7 +14,7 @@ const RULES = [
   { re: /музык|песн|трек|играет|плеер|звук|мелоди|music|song|track|player|sound|melod/,
     a: "Музыку я сочиняю прямо в браузере: десять треков, кнопки << и >> переключают их. Чтобы включить, нажми Play в плеере, сама она не запускается.",
     en: "The music is composed right in the browser: ten tracks, the << and >> buttons switch them. Press Play in the player to start it; it never starts on its own." },
-  { re: /сайт|nyan|нян|fopka|фопка|что тут|что здесь|о чем|о чём|\bsite\b|website|what.*here|what is this|about/,
+  { re: /сайт|nyan|нян|фопка|fopka|что тут|что здесь|о чем|о чём|\bsite\b|website|what.*here|what is this|about/,
     a: "NYAN — пиксельный уголок: музыка, цитаты и ИИ-поддержка. Сайт сделан вручную в пиксельном стиле.",
     en: "NYAN is a pixel corner: music, quotes and AI support. The site is built by hand in a pixel style." },
   { re: /новост|news/,
@@ -119,7 +119,7 @@ window.addEventListener("langchange", () => { showSound(); if ($("log").children
 soundBtn.addEventListener("click", () => {
   soundOn = !soundOn;
   showSound();
-  try { localStorage.setItem("fopka-blip", soundOn ? "on" : "off"); } catch (e) {}
+  try { localStorage.setItem("nyan-blip", soundOn ? "on" : "off"); } catch (e) {}
   blip();
 });
 

@@ -15,5 +15,5 @@
   ];
   const wrap = (i, n) => ((i % n) + n) % n;
   const api = { TRACKS, wrap };
-  if (typeof module !== "undefined" && module.exports) module.exports = api; else root.FopkaTracks = api;
+  if (typeof module !== "undefined" && module.exports) module.exports = api; else root.NyanTracks = api;
 })(typeof window !== "undefined" ? window : globalThis);

@@ -3,7 +3,7 @@
   // музыка и звуки игры: всё синтезируется кодом (Web Audio), файлов нет. Свой AudioContext, не мешает плееру сайта.
   const MINOR = [0, 2, 3, 5, 7, 8, 10], BPM = 124, ROOT = 57, PROG = [0, 5, 2, 6], BARS = 8, STEPS = BARS * 16, SD = 60 / BPM / 4;
   let ctx = null, master, musicGain, sfxGain, noiseBuf, timer = null, step = 0, nextT = 0, level = -1, running = false, lead = null;
-  let muted = false; try { muted = localStorage.getItem("fopka-game-sound") === "off"; } catch (e) {}
+  let muted = false; try { muted = localStorage.getItem("nyan-game-sound") === "off"; } catch (e) {}
   const last = {};
   const midi = (m) => 440 * Math.pow(2, (m - 69) / 12);
   const chordOf = (deg) => { const n = (i) => MINOR[i % 7] + 12 * Math.floor(i / 7); return [n(deg), n(deg + 2), n(deg + 4)]; };
@@ -104,8 +104,8 @@
       if (last[name] && now - last[name] < gap) return;
       last[name] = now; SFX[name](now + 0.005);
     },
-    toggleMute() { muted = !muted; try { localStorage.setItem("fopka-game-sound", muted ? "off" : "on"); } catch (e) {} if (ctx) master.gain.setTargetAtTime(muted ? 0 : 1, ctx.currentTime, 0.03); return muted; },
+    toggleMute() { muted = !muted; try { localStorage.setItem("nyan-game-sound", muted ? "off" : "on"); } catch (e) {} if (ctx) master.gain.setTargetAtTime(muted ? 0 : 1, ctx.currentTime, 0.03); return muted; },
     _state() { return { ctx: ctx ? ctx.state : "none", running, level, muted }; }
   };
-  root.FopkaAudio = api;
+  root.NyanAudio = api;
 })(window);

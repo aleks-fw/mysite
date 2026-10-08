@@ -1,12 +1,12 @@
 "use strict";
 
-/* Меню треков: окно поверх страницы. Работает только через FopkaMusic и событие musicchange. */
+/* Меню треков: окно поверх страницы. Работает только через NyanMusic и событие musicchange. */
 (function () {
   const box = $("tmenu");
   const list = $("tmenuList");
   const opener = $("openTracks");
-  if (!box || !list || !opener || !window.FopkaMusic) return;
-  const M = window.FopkaMusic;
+  if (!box || !list || !opener || !window.NyanMusic) return;
+  const M = window.NyanMusic;
   let items = [];
 
   function render() {
@@ -137,5 +137,5 @@
   window.addEventListener("langchange", () => { render(); if (!det.hidden) fillDetail(); });
 
   render();
-  window.FopkaTracksMenu = { open, close };
+  window.NyanTracksMenu = { open, close };
 })();

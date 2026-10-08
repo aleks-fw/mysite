@@ -1,12 +1,12 @@
 (function (root) {
   "use strict";
-  const L = root.FopkaLogic;
+  const L = root.NyanLogic;
   const B = { x: 7.5, zMin: -4, zMax: 3.5 }, BULLET_V = 22, KEYS_V = 12;
   const KIND_COLOR = { virus: 0xf2a0b8, bug: 0xf3d88c, shooter: 0xff7a9a, seg: 0x7bd88f, bot: 0x9b6be8 };
   const BOSS_COLOR = { mother: 0xa64f69, trojan: 0xd9822b, wormhead: 0x57c96f, cipher: 0x3ec8d8, botnet: 0x8a5be0 };
   const PICK_COLOR = { repair: 0xf2a0b8, bomb: 0xffffff };
   const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
-  const A = () => root.FopkaAudio, snd = (n) => { const a = A(); if (a) a.sfx(n); };
+  const A = () => root.NyanAudio, snd = (n) => { const a = A(); if (a) a.sfx(n); };
   const inGame = () => location.hash === "#/game";
   const HINTS = [[0.2, "Веди мышью или пальцем: корабль летит за курсором"], [4.2, "Стрельба автоматическая"], [7.5, "ЛКМ или R: ракета (перезарядка 25 с)"]];
 
@@ -17,7 +17,7 @@
     const target = { x: 0, z: 2 }, keys = {};
     let state = "idle", r = null, over = false, tutDone = false, bosses = null;
     const dbgFlags = { noSpawn: false };
-    try { tutDone = localStorage.getItem("fopka-game-tut") === "1"; } catch (e) {}
+    try { tutDone = localStorage.getItem("nyan-game-tut") === "1"; } catch (e) {}
 
     function fresh() {
       return { hp: stats.maxHp, score: 0, bits: 0, cores: 0, time: 0, combo: 0, comboT: 0, fireT: 0, inv: 0, bomb: stats.startBombs, lastWave: 0,
@@ -126,7 +126,7 @@
       o.onOver({ score: r.score, bits: r.bits, cores: r.cores, time: r.time, wave: r.lastWave, best: save.best, newBest });
     }
 
-    bosses = root.FopkaBosses.create({
+    bosses = root.NyanBosses.create({
       world, player: () => ({ x: world.ship.position.x, z: world.ship.position.z }), enemies: () => r.enemies,
       addEnemy: (k, x, z, hp, sp, ph) => addEnemy(k, x, z, hp, sp, ph), shoot, kill
     });
@@ -154,7 +154,7 @@
         if (r.count <= 0) { r.inv = 2; if (A()) A().setLevel(0); }
         pushUi(); return;
       }
-      if (!tutDone) { r.hintT += dt; if (r.hintI < HINTS.length && r.hintT >= HINTS[r.hintI][0]) { ui.hint(HINTS[r.hintI][1]); r.hintI++; if (r.hintI === HINTS.length) { tutDone = true; try { localStorage.setItem("fopka-game-tut", "1"); } catch (e) {} } } }
+      if (!tutDone) { r.hintT += dt; if (r.hintI < HINTS.length && r.hintT >= HINTS[r.hintI][0]) { ui.hint(HINTS[r.hintI][1]); r.hintI++; if (r.hintI === HINTS.length) { tutDone = true; try { localStorage.setItem("nyan-game-tut", "1"); } catch (e) {} } } }
       if (r.warp > 0) { r.warp -= dt; const t = 2.6 - Math.max(0, r.warp), sm = (x) => { x = clamp(x, 0, 1); return x * x * (3 - 2 * x); }; world.setWarp(sm(t / 0.5) * (1 - sm((t - 2.0) / 0.6))); r.inv = Math.max(r.inv, 0.3); if (r.warp <= 0) world.setWarp(0); }
       r.time += dt; r.inv = Math.max(0, r.inv - dt); r.comboT -= dt; if (r.comboT <= 0) r.combo = 0;
       if (stats.shieldCd > 0) { if (r.shieldT > 0) r.shieldT = Math.max(0, r.shieldT - dt); world.setShield(r.shieldT <= 0); } else world.setShield(false);
@@ -315,5 +315,5 @@
     };
     return api;
   }
-  root.FopkaPlay = { create };
+  root.NyanPlay = { create };
 })(window);

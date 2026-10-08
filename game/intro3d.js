@@ -185,5 +185,5 @@
   }
   function take() { const r = ready; ready = null; if (r) { r.cv.style.cssText = ""; r.cv.remove(); } return r; }
   const api = { supported, create, prepare, take, maxCost: 3500 };
-  root.FopkaIntro3D = api;
+  root.NyanIntro3D = api;
 })(window);

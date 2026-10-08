@@ -1,7 +1,7 @@
 (function (root) {
   "use strict";
   // Чистая логика игры (без DOM и Three.js): сохранение, дерево постоянных талантов, характеристики, волны, боссы.
-  const SAVE_KEY = "fopka-game";
+  const SAVE_KEY = "nyan-game";
   const clampInt = (v, lo, hi) => { v = Math.floor(Number(v)); return Number.isFinite(v) ? Math.min(hi, Math.max(lo, v)) : lo; };
 
   // ---------- таланты (по мотивам карт талантов Archero 2: обычные, «супер», «ульта», общие, титан) ----------
@@ -167,5 +167,5 @@
   const ROCKET = { cooldown: 25, damage: 15, splash: 10, radius: 2.6, speed: 16 };
 
   const api = { ROCKET, SAVE_KEY, BRANCHES, TALENTS, BOSSES, talentById, defaultSave, loadSave, writeSave, level, talentCost, canBuy, buyTalent, missingReq, talentValue, deriveStats, bossFor, waveConfig, createSpawner, circleHit, scoreFor, bitsFor, rollDrop };
-  if (typeof module !== "undefined" && module.exports) module.exports = api; else root.FopkaLogic = api;
+  if (typeof module !== "undefined" && module.exports) module.exports = api; else root.NyanLogic = api;
 })(typeof window !== "undefined" ? window : globalThis);

@@ -125,5 +125,5 @@
       death(e) { const d = e.kind === "boss" ? B[e.boss] : null; if (d && d.death) d.death(e); }
     };
   }
-  root.FopkaBosses = { create };
+  root.NyanBosses = { create };
 })(window);

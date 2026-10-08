@@ -56,5 +56,5 @@
       }
     });
   }
-  root.FopkaEngine = { webglOk, create };
+  root.NyanEngine = { webglOk, create };
 })(window);

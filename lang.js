@@ -279,7 +279,7 @@ const I18N_REV = {};
 Object.keys(I18N).forEach((k) => { I18N_REV[I18N[k]] = k; });
 
 let lang = "ru";
-try { const s = localStorage.getItem("fopka-lang"); if (s === "en" || s === "ru") lang = s; } catch (e) {}
+try { const s = localStorage.getItem("nyan-lang"); if (s === "en" || s === "ru") lang = s; } catch (e) {}
 
 // перевод строки для динамических текстов
 function tr(ru) { return lang === "en" && I18N[ru] ? I18N[ru] : ru; }
@@ -326,7 +326,7 @@ const langBtn = document.getElementById("lang");
 if (langBtn) {
   langBtn.addEventListener("click", () => {
     lang = lang === "ru" ? "en" : "ru";
-    try { localStorage.setItem("fopka-lang", lang); } catch (e) {}
+    try { localStorage.setItem("nyan-lang", lang); } catch (e) {}
     applyLang();
   });
 }

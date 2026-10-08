@@ -7,7 +7,7 @@ let sfxCtx = null;
 let sfxEnd = 0; // момент (по часам AudioContext), когда закончится последний запланированный звук
 let soundOn = true;
 let musicOn = false; // true, пока на сайте играет музыка: бипы печати в чате тогда молчат
-try { soundOn = localStorage.getItem("fopka-blip") !== "off"; } catch (e) {}
+try { soundOn = localStorage.getItem("nyan-blip") !== "off"; } catch (e) {}
 
 function sfxCtxReady() {
   if (!sfxCtx) sfxCtx = new (window.AudioContext || window.webkitAudioContext)();
