@@ -183,8 +183,8 @@ function setUi(on) {
   musicOn = on;
   $("state").classList.toggle("is-on", on);
   $("stateText").textContent = on ? "PLAYING" : "PAUSED";
-  $("play").innerHTML = on ? "&#10074;&#10074;" : "&#9654;";
-  $("miniPlay").innerHTML = on ? "&#10074;&#10074;" : "&#9654;";
+  $("play").innerHTML = on ? "&#10074;&#10074;" : "&#9654;&#xFE0E;";
+  $("miniPlay").innerHTML = on ? "&#10074;&#10074;" : "&#9654;&#xFE0E;";
   $("mini").classList.toggle("is-on", on);
   if (on) everPlayed = true;
   updateMini();

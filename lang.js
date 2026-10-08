@@ -185,7 +185,7 @@ const I18N = {
   "А ещё стараюсь быть добрым и честным с людьми. Ниже можно послушать музыку, которую ИИ написал для меня, и спросить что-нибудь у ИИ-поддержки.": "I also try to be kind and honest with people. Below you can listen to music the AI wrote for me and ask the AI support something.",
   "Слушать треки →": "Listen to tracks →",
   "Связь со мной": "Contact me",
-  "↗ маскот сайта": "↗ site mascot",
+  "маскот сайта": "site mascot",
   "страница не найдена": "the page is not found",
   "год первого жука-бага": "the year of the first bug",
   "пока 2": "just 2",

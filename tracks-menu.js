@@ -52,7 +52,7 @@
     $("tdetN").textContent = String(c + 1).padStart(2, "0") + " / " + String(M.tracks.length).padStart(2, "0");
     $("tdetT").textContent = t.title;
     $("tdetM").textContent = tr(t.mood) + " · " + t.bpm + " BPM";
-    $("tdetPlay").innerHTML = M.isPlaying() ? "&#10074;&#10074;" : "&#9654;";
+    $("tdetPlay").innerHTML = M.isPlaying() ? "&#10074;&#10074;" : "&#9654;&#xFE0E;";
     rateBtns.forEach((b) => b.setAttribute("aria-pressed", String(Number(b.dataset.rate) === M.rate())));
   }
   function tickDetail() {

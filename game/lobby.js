@@ -147,7 +147,7 @@
     S.ui = {
       set(s) {
         put("hudScore", t("ОЧКИ") + " " + s.score); put("hudTime", fmtTime(s.time)); put("hudWave", t("ВОЛНА") + " " + s.wave);
-        put("hudHp", s.maxHp > 10 ? "♥ " + Math.max(0, s.hp) + "/" + s.maxHp : "♥".repeat(Math.max(0, s.hp)) + "·".repeat(Math.max(0, s.maxHp - s.hp))); put("hudCombo", s.combo > 1 ? "x" + s.combo : "");
+        put("hudHp", s.maxHp > 10 ? "♥︎ " + Math.max(0, s.hp) + "/" + s.maxHp : "♥︎".repeat(Math.max(0, s.hp)) + "·".repeat(Math.max(0, s.maxHp - s.hp))); put("hudCombo", s.combo > 1 ? "x" + s.combo : "");
         put("hudBits", t("БИТЫ") + " " + s.bits); put("hudCores", s.cores ? t("ЯДРА") + " " + s.cores : "");
         const b = document.getElementById("hudBomb"); b.hidden = !s.bomb; if (S.last.bn !== s.bomb) { S.last.bn = s.bomb; b.dataset.n = s.bomb > 1 ? "×" + s.bomb : ""; }
         { const cd = s.rocketCd, rb = S.rocketBtn, key = s.rocketStock >= s.rocketMax ? -1 : Math.ceil(cd), lab = s.rocketStock > 0 ? (s.rocketMax > 1 ? "×" + s.rocketStock : "ЛКМ") : key + "c";
