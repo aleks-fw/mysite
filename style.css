@@ -375,7 +375,9 @@ h1 { font-weight: 800; font-size: clamp(38px, 4.7vw, 84px); line-height: 1.12; l
   .hero { grid-template-columns: 1fr; gap: 40px; padding: 40px 0 40px; }
   h1 { font-size: 8.6vw; }
   .lead { font-size: 18px; }
-  .photo { max-width: 320px; justify-self: start; }
+  .photo { max-width: 320px; justify-self: start; padding-bottom: 6px; }
+  /* подпись под фото — обычным рукописным текстом, а не наклонной «бумажкой» */
+  .photo__cap { position: static; display: block; margin: 16px 0 0 4px; padding: 0; background: none; box-shadow: none; transform: none; font-size: 24px; }
   .stat { padding: 16px 16px 18px; }
   .stat span { font-size: 11px; letter-spacing: .1em; }
   .row { grid-template-columns: minmax(0, 1fr); gap: 40px; }
