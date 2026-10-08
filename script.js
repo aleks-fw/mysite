@@ -370,6 +370,9 @@ function applyRoute(initial) {
     }
   }
   updateNav();
+  // на телефоне меню прокручивается: показываем активный пункт
+  const act = navLinks.find((a) => a.classList.contains("is-active"));
+  if (act && act.parentElement.scrollWidth > act.parentElement.clientWidth) act.parentElement.scrollLeft = act.offsetLeft - 20;
   updateMini();
   if (window.NyanLobby) { if (v === "game") NyanLobby.enter(); else NyanLobby.exit(); }
 }
