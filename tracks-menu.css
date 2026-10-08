@@ -1,0 +1,63 @@
+/* Меню треков: пиксельное оформление (рамки и тени как у кнопок сайта) */
+.tmenu { position: fixed; inset: 0; z-index: 60; display: grid; place-items: center; padding: 16px; }
+.tmenu[hidden] { display: none; }
+.tmenu__back { position: absolute; inset: 0; background: rgba(43, 39, 69, .7); }
+.tmenu__box { position: relative; width: min(560px, calc(100vw - 32px)); max-height: calc(100vh - 32px); display: flex; flex-direction: column; background: var(--paper); color: var(--text); border: 2px solid var(--line); box-shadow: 8px 8px 0 var(--pink); font-family: var(--mono); overflow: hidden; }
+.tmenu__head { display: flex; align-items: center; gap: 10px 14px; padding: 14px 16px; border-bottom: 2px solid var(--line); }
+.tmenu__head h2 { margin: 0; flex: 1 1 auto; font-family: var(--mono); font-size: 16px; font-weight: 800; text-transform: uppercase; letter-spacing: .12em; }
+.tmenu__head h2::before { content: "> "; color: var(--pink-t); }
+.tmenu__x { font-family: var(--mono); font-size: 12px; font-weight: 700; line-height: 1.2; padding: 7px 10px; border: 2px solid var(--line); background: transparent; color: var(--text); cursor: pointer; box-shadow: 3px 3px 0 var(--line); }
+.tmenu__x:active { transform: translate(2px, 2px); box-shadow: 1px 1px 0 var(--line); }
+.tmenu__x:focus-visible, .tmenu__item:focus-visible { outline: 3px solid var(--orange); outline-offset: 2px; }
+.tmenu__list { list-style: none; margin: 0; padding: 12px; display: grid; gap: 8px; overflow-y: auto; overscroll-behavior: contain; }
+.tmenu__item { width: 100%; display: grid; grid-template-columns: 40px 32px 1fr auto 28px; align-items: center; gap: 10px; padding: 12px 10px; border: 2px solid var(--line); background: transparent; color: var(--text); font: inherit; text-align: left; text-transform: uppercase; letter-spacing: .06em; cursor: pointer; box-shadow: 4px 4px 0 var(--line-d); transition: transform .08s; }
+.tmenu__item:hover { transform: translate(-2px, -2px); box-shadow: 6px 6px 0 var(--line); }
+.tmenu__item:active { transform: translate(2px, 2px); box-shadow: 2px 2px 0 var(--line); }
+.tmenu__item[aria-current="true"] { background: var(--pink); border-color: var(--pink); color: var(--on-pink); box-shadow: 4px 4px 0 var(--line); }
+.tmenu__n { font-size: 13px; opacity: .8; }
+.tmenu__t { font-weight: 700; }
+.tmenu__m { font-size: 12px; opacity: .8; }
+.tmenu__eq { display: flex; align-items: flex-end; gap: 2px; height: 16px; visibility: hidden; }
+.tmenu__eq i { width: 4px; height: 40%; background: currentColor; }
+.tmenu__item.is-playing .tmenu__eq { visibility: visible; }
+.tmenu__item.is-playing .tmenu__eq i { animation: tmeq .7s steps(4) infinite alternate; }
+.tmenu__item.is-playing .tmenu__eq i:nth-child(2) { animation-delay: .15s; }
+.tmenu__item.is-playing .tmenu__eq i:nth-child(3) { animation-delay: .3s; }
+@keyframes tmeq { from { height: 25%; } to { height: 100%; } }
+body.tmenu-open { overflow: hidden; }
+@media (prefers-reduced-motion: reduce) {
+  .tmenu__item { transition: none; }
+  .tmenu__item.is-playing .tmenu__eq i { animation: none; height: 70%; }
+}
+@media (max-width: 480px) { .tmenu__item { grid-template-columns: 40px 28px 1fr 24px; } .tmenu__m { display: none; } }
+
+/* миниатюра трека в списке */
+.tmenu__av { width: 40px; height: 40px; object-fit: cover; image-rendering: pixelated; border: 2px solid var(--line); background: var(--paper); }
+.tmenu__list[hidden], .tdet[hidden], .tmenu__back-btn[hidden] { display: none; }
+
+/* второе окно: плеер выбранного трека */
+.tdet { display: grid; justify-items: center; gap: 12px; padding: 18px 16px 20px; overflow-y: auto; overscroll-behavior: contain; }
+.tdet__art { width: min(220px, 52vw); height: auto; aspect-ratio: 1; object-fit: cover; image-rendering: pixelated; border: 2px solid var(--line); box-shadow: 6px 6px 0 var(--pink); background: var(--paper); }
+.tdet__meta { display: grid; justify-items: center; gap: 4px; text-align: center; text-transform: uppercase; letter-spacing: .06em; }
+.tdet__n, .tdet__m { font-size: 12px; opacity: .8; }
+.tdet__t { font-size: 22px; font-weight: 800; letter-spacing: .04em; overflow-wrap: anywhere; }
+.tdet__bar { width: 100%; height: 14px; border: 2px solid var(--line); background: var(--paper); cursor: pointer; }
+.tdet__bar:focus-visible { outline: 3px solid var(--orange); outline-offset: 2px; }
+.tdet__fill { height: 100%; width: 0; background: var(--pink); }
+.tdet__times { width: 100%; display: flex; justify-content: space-between; font-size: 12px; margin-top: -6px; opacity: .8; }
+.tdet__ctl { display: flex; gap: 12px; }
+.tdet__ctl .tmenu__x { min-width: 52px; padding: 10px 14px; font-size: 14px; }
+.tdet__play { background: var(--pink); border-color: var(--pink); color: var(--on-pink); }
+.tdet__rate { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; }
+.tdet__rb[aria-pressed="true"] { background: var(--pink); border-color: var(--pink); color: var(--on-pink); }
+.tmenu__back-btn { order: -1; }
+@media (max-height: 640px) { .tdet__art { width: 120px; height: auto; } }
+
+/* кнопка режима (повтор / по порядку / случайно): показываем значок по data-mode, при смене пиксельный поворот */
+[data-modebtn] svg { display: none; }
+[data-modebtn][data-mode="repeat"] .m-repeat, [data-modebtn][data-mode="order"] .m-order, [data-modebtn][data-mode="random"] .m-random { display: block; }
+[data-modebtn].is-anim svg { animation: modeflip .42s steps(6) 1; }
+@keyframes modeflip { 0% { transform: rotate(0) scale(1); } 50% { transform: rotate(180deg) scale(.55); } 100% { transform: rotate(360deg) scale(1); } }
+.tdet__mode { display: inline-flex; align-items: center; justify-content: center; }
+.tdet__ctl { flex-wrap: wrap; justify-content: center; }
+@media (prefers-reduced-motion: reduce) { [data-modebtn].is-anim svg { animation: none; } }

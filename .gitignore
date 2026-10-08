@@ -1,0 +1,8 @@
+docs/
+мд/
+tests/
+.playwright-mcp/
+node_modules/
+.env
+*.log
+.impeccable/

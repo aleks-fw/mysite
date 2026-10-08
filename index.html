@@ -1,0 +1,357 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>FOPKA</title>
+  <meta name="description" content="Пиксельный уголок FOPKA: музыка, цитаты и ИИ-поддержка">
+  <link rel="canonical" href="https://aleks-fw.github.io/mysite/">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="FOPKA">
+  <meta property="og:description" content="Пиксельный уголок FOPKA: музыка, цитаты, игра и ИИ-поддержка">
+  <meta property="og:url" content="https://aleks-fw.github.io/mysite/">
+  <meta property="og:image" content="https://aleks-fw.github.io/mysite/cat-open.png">
+  <meta name="twitter:card" content="summary">
+  <script>
+    // по умолчанию светлая тема; при переходе между страницами она приходит из ссылки (?theme=), при обновлении страницы сбрасывается на светлую
+    var t = "light", m = /[?&]theme=(dark|light)/.exec(location.search), nav = null;
+    try { nav = performance.getEntriesByType("navigation")[0]; } catch (e) {}
+    if (m && !(nav && nav.type === "reload")) t = m[1];
+    document.documentElement.setAttribute("data-theme", t);
+  </script>
+  <link rel="stylesheet" href="fonts/fonts.css">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns=%22http://www.w3.org/2000/svg%22%20viewBox=%220%200%208%208%22%20shape-rendering=%22crispEdges%22%3E%3Crect%20width=%228%22%20height=%228%22%20fill=%22%23575279%22/%3E%3Crect%20x=%222%22%20y=%221%22%20width=%221%22%20height=%221%22%20fill=%22%23faf4ed%22/%3E%3Crect%20x=%223%22%20y=%221%22%20width=%221%22%20height=%221%22%20fill=%22%23faf4ed%22/%3E%3Crect%20x=%224%22%20y=%221%22%20width=%221%22%20height=%221%22%20fill=%22%23faf4ed%22/%3E%3Crect%20x=%225%22%20y=%221%22%20width=%221%22%20height=%221%22%20fill=%22%23faf4ed%22/%3E%3Crect%20x=%222%22%20y=%222%22%20width=%221%22%20height=%221%22%20fill=%22%23faf4ed%22/%3E%3Crect%20x=%223%22%20y=%222%22%20width=%221%22%20height=%221%22%20fill=%22%23faf4ed%22/%3E%3Crect%20x=%222%22%20y=%223%22%20width=%221%22%20height=%221%22%20fill=%22%23faf4ed%22/%3E%3Crect%20x=%223%22%20y=%223%22%20width=%221%22%20height=%221%22%20fill=%22%23faf4ed%22/%3E%3Crect%20x=%224%22%20y=%223%22%20width=%221%22%20height=%221%22%20fill=%22%23faf4ed%22/%3E%3Crect%20x=%222%22%20y=%224%22%20width=%221%22%20height=%221%22%20fill=%22%23faf4ed%22/%3E%3Crect%20x=%223%22%20y=%224%22%20width=%221%22%20height=%221%22%20fill=%22%23faf4ed%22/%3E%3Crect%20x=%222%22%20y=%225%22%20width=%221%22%20height=%221%22%20fill=%22%23faf4ed%22/%3E%3Crect%20x=%223%22%20y=%225%22%20width=%221%22%20height=%221%22%20fill=%22%23faf4ed%22/%3E%3Crect%20x=%222%22%20y=%226%22%20width=%221%22%20height=%221%22%20fill=%22%23faf4ed%22/%3E%3Crect%20x=%223%22%20y=%226%22%20width=%221%22%20height=%221%22%20fill=%22%23faf4ed%22/%3E%3Crect%20x=%225%22%20y=%225%22%20width=%222%22%20height=%222%22%20fill=%22%23a64f69%22/%3E%3Crect%20x=%225%22%20y=%226%22%20width=%221%22%20height=%221%22%20fill=%22%23ffffff%22/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="game/game.css">
+  <link rel="stylesheet" href="tracks-menu.css">
+  <link rel="stylesheet" href="os/os.css">
+</head>
+<body id="top">
+  <div class="news" role="region" aria-label="Новости">
+    <div class="news__label">FAKE NEWS</div>
+    <div class="news__view">
+      <div class="news__move">
+      <div class="news__track"><span>СРОЧНО: нейросеть попросила повышения и отпуск на три пикселя</span><span>Учёные выяснили, что сайт, написанный ИИ, открывается быстрее, чем остывает чай</span><span>Курс пиксельного рубля вырос на 2 квадрата</span><span>Ночью в игре «Антивирус» заметили вирус, который сам себя ловит. Мы его не трогали</span><span>Поддержка FOPKA отвечает так быстро, что иногда успевает ответить до вопроса</span><span>В Москве задержан баг: он выдавал себя за фичу</span><span>Эксперты советуют: если сайт не открывается, нажмите F5 и подумайте о хорошем</span></div>
+      <div class="news__track" aria-hidden="true"><span>СРОЧНО: нейросеть попросила повышения и отпуск на три пикселя</span><span>Учёные выяснили, что сайт, написанный ИИ, открывается быстрее, чем остывает чай</span><span>Курс пиксельного рубля вырос на 2 квадрата</span><span>Ночью в игре «Антивирус» заметили вирус, который сам себя ловит. Мы его не трогали</span><span>Поддержка FOPKA отвечает так быстро, что иногда успевает ответить до вопроса</span><span>В Москве задержан баг: он выдавал себя за фичу</span><span>Эксперты советуют: если сайт не открывается, нажмите F5 и подумайте о хорошем</span></div>
+      </div>
+    </div>
+  </div>
+
+  <header class="top">
+    <div class="wrap top__in">
+      <a class="logo" href="#top" aria-label="FOPKA, на главную">fopka<i class="logo__dot" aria-hidden="true"></i>fm</a>
+      <div class="top__right">
+        <nav class="nav" aria-label="Разделы">
+          <a class="nav__a is-active" href="#top">Главная</a>
+          <a class="nav__a" href="#/portfolio">Портфолио</a>
+          <a class="nav__a" href="#/mcp">MCP</a>
+          <a class="nav__a" href="#/support">Поддержка</a>
+          <a class="nav__a" href="#/game" id="gameLink">Игра</a>
+        </nav>
+        <span class="top__sep" aria-hidden="true"></span>
+        <div class="lang-slot"><button class="lang" id="lang" type="button" aria-label="Сменить язык" title="Сменить язык"><span class="lang__next" aria-hidden="true">EN</span><span class="lang__cur">RU</span></button></div>
+        <button class="theme" id="theme" type="button" aria-label="Сменить тему" aria-pressed="false" title="Сменить тему"><span class="theme__sky" aria-hidden="true"></span><span class="theme__thumb" aria-hidden="true"><svg class="theme__sun" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="square"><circle cx="12" cy="12" r="4"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M4.9 19.1L7 17M17 7l2.1-2.1"/></svg><svg class="theme__moon" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linejoin="miter"><path d="M20 14.5A8.5 8.5 0 0 1 9.5 4 8.5 8.5 0 1 0 20 14.5z"/></svg></span></button>
+      </div>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <div class="view" data-view="home">
+    <section class="hero" id="home">
+      <div class="hero__text">
+        <h1><span class="nw">я <span class="mark">ПРОГРАММИСТ</span>,</span><br><span class="nw">пишу САЙТЫ</span></h1>
+        <p class="sub-h">..а человек я просто неплохой.</p>
+        <p class="lead">Я вайбкодер: придумываю идею, а ИИ помогает собрать её в код. <span class="hl">Сайты делаю, потому что мне это нравится.</span> А ещё стараюсь быть добрым и честным с людьми. Ниже можно послушать музыку, которую ИИ написал для меня, и спросить что-нибудь у ИИ-поддержки.</p>
+        <div class="hero__btns">
+          <button class="hbtn" id="openTracks" type="button" aria-haspopup="dialog">Слушать треки &rarr;</button>
+          <button class="hbtn hbtn--pink" id="heroChat" type="button">Поддержка</button>
+        </div>
+      </div>
+      <figure class="photo">
+        <span class="photo__tag">FOPKA</span>
+        <div class="photo__frame">
+          <img class="cat cat--open" src="cat-open.png" width="511" height="513" alt="Пиксельный кот на тосте с радугой, глаза открыты">
+          <img class="cat cat--closed" src="cat-closed.png" width="511" height="513" alt="Пиксельный кот на тосте с радугой спит, глаза закрыты">
+        </div>
+        <figcaption class="photo__cap">&#8599; маскот сайта</figcaption>
+      </figure>
+    </section>
+
+    <div class="stats" role="list">
+      <div class="stat" role="listitem"><b>6</b><span>сайтов в портфолио</span></div>
+      <div class="stat" role="listitem"><b>2</b><span>собственных MCP-сервера</span></div>
+      <div class="stat" role="listitem"><b>10</b><span>треков, музыку пишет ИИ</span></div>
+      <div class="stat" role="listitem"><b>24/7</b><span>отвечает ИИ-поддержка</span></div>
+    </div>
+
+    <div class="screen2" id="music">
+    <div class="row">
+      <figure class="quote">
+        <div class="cap">// QUOTE.TXT</div>
+        <blockquote>
+          <span class="quote__mark" aria-hidden="true">&ldquo;</span>
+          Делаю сайты не потому что надо, а потому что нравится. Музыку пишет ИИ по моей просьбе.
+        </blockquote>
+        <div class="quote__line"></div>
+        <figcaption class="cap">КРАТКО О FOPKA</figcaption>
+      </figure>
+
+      <section class="player" aria-label="Музыкальный плеер">
+        <div class="player__bg" id="playerBg" aria-hidden="true"></div>
+        <span class="stamp">FOPKA.FM</span>
+        <div class="player__top">
+          <span class="state" id="state"><i></i><b id="stateText">PAUSED</b></span>
+          <span class="path">~/MUSIC/FOPKA/ORIGINALS</span>
+        </div>
+        <div class="player__main">
+          <img class="cover" id="cover" src="img/tracks/a1.png" width="96" height="96" alt="Аватарка трека">
+          <div class="eq" id="eq" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
+          <div class="meta">
+            <div class="title" id="title">Pixel Rain</div>
+            <div class="sub" id="sub">FOPKA · ORIGINALS</div>
+          </div>
+        </div>
+        <div class="bar" id="bar" role="progressbar" aria-label="Прогресс трека" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><div class="bar__fill" id="fill"></div></div>
+        <div class="times"><span id="tCur">0:00</span><span id="tTot">0:00</span></div>
+        <div class="player__foot">
+          <span class="num" id="num">01 / 10</span>
+          <div class="ctl">
+            <button class="pbtn" id="prev" type="button" aria-label="Предыдущий трек">&lt;&lt;</button>
+            <button class="pbtn pbtn--main" id="play" type="button" aria-label="Играть или пауза">&#9654;</button>
+            <button class="pbtn" id="next" type="button" aria-label="Следующий трек">&gt;&gt;</button>
+            <button class="pbtn pbtn--mode" id="mode" data-modebtn type="button"><svg class="m-repeat" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="square"><path d="M4 9h14l-3-3M20 15H6l3 3"/></svg><svg class="m-order" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="square"><path d="M4 5v14M8 12h12m-5-5l5 5-5 5"/></svg><svg class="m-random" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="square"><path d="M3 7h4l10 10h4M3 17h4l3-3M14 10l3-3h4M18 4l3 3-3 3M18 14l3 3-3 3"/></svg></button>
+          </div>
+        </div>
+      </section>
+      <section class="osinv" id="osInvite" aria-labelledby="osInvTitle">
+        <span class="cap">// legacy mode / как раньше</span>
+        <h2 id="osInvTitle">Запустить <span class="mark mark--sm">OS-РЕЖИМ</span>?</h2>
+        <pre class="term" aria-hidden="true"><span class="boot__l">$ cd /var/fopka-os</span><span class="boot__l">$ ./boot.sh</span><span class="boot__l">[ OK ] тема загружена</span><span class="boot__l">[ OK ] ~/portfolio, ~/music, ~/games подключены</span><span class="boot__l">[ OK ] демон музыки запущен</span><span class="boot__l">[ READY ] десктоп-режим готов_</span></pre>
+        <div class="osinv__btns">
+          <a class="hbtn hbtn--pink" href="#/os">&#8599; Открыть OS-режим</a>
+          <a class="hbtn" href="#top">&larr; Остаться на сайте</a>
+        </div>
+        <p class="osinv__note">Эта версия сделана ради прикола: обычного сайта вполне достаточно.</p>
+      </section>
+    </div>
+    </div>
+    </div>
+
+    <div class="view" data-view="portfolio" hidden>
+    <section class="folio" aria-labelledby="folioTitle">
+      <div class="folio__head">
+        <h2 role="heading" aria-level="1" id="folioTitle">мои <span class="mark mark--sm">РАБОТЫ</span></h2>
+        <p class="cap">// PORTFOLIO &middot; сайты и MCP-серверы</p>
+      </div>
+      <ul class="folio__grid">
+        <li class="work">
+          <span class="work__tag">САЙТ</span>
+          <h2>Анна Светлова, семейный психолог</h2>
+          <p>Сайт для индивидуальных и семейных консультаций.</p>
+          <a class="work__link" href="https://aleks-fw.github.io/psix-sait/" target="_blank" rel="noopener">Открыть &rarr;</a>
+        </li>
+        <li class="work">
+          <span class="work__tag">САЙТ</span>
+          <h2>BASELINE, дома под ключ</h2>
+          <p>Сайт строительной компании, которая строит дома под ключ.</p>
+          <a class="work__link" href="https://aleks-fw.github.io/stroy-sait/" target="_blank" rel="noopener">Открыть &rarr;</a>
+        </li>
+        <li class="work">
+          <span class="work__tag">САЙТ</span>
+          <h2>Здрасьте, гости</h2>
+          <p>Сайт кафе в городе: меню, отзывы, контакты.</p>
+          <a class="work__link" href="https://aleks-fw.github.io/demo-cafe/" target="_blank" rel="noopener">Открыть &rarr;</a>
+        </li>
+        <li class="work">
+          <span class="work__tag">САЙТ</span>
+          <h2>FORGE Athletic Club</h2>
+          <p>Сайт фитнес-клуба с тренировками.</p>
+          <a class="work__link" href="https://aleks-fw.github.io/sport-demo/" target="_blank" rel="noopener">Открыть &rarr;</a>
+        </li>
+        <li class="work">
+          <span class="work__tag">САЙТ</span>
+          <h2>NOVA</h2>
+          <p>Учебный интернет-магазин одежды.</p>
+          <a class="work__link" href="https://aleks-fw.github.io/market/" target="_blank" rel="noopener">Открыть &rarr;</a>
+        </li>
+        <li class="work">
+          <span class="work__tag">САЙТ</span>
+          <h2>Hairbar, барбершоп</h2>
+          <p>Сайт стильного и модного барбершопа в Краснодаре.</p>
+          <a class="work__link" href="https://aleks657111-maker.github.io/Hairbar/" target="_blank" rel="noopener">Открыть &rarr;</a>
+        </li>
+        <li class="work work--mcp">
+          <span class="work__tag">MCP</span>
+          <h2>CodeCheck MCP</h2>
+          <p>Проверяет готовый сайт в настоящем браузере и находит проблемы с доступностью, скоростью, безопасностью и SEO.</p>
+          <a class="work__link" href="https://github.com/aleks-fw/CodeCheck-MCP" target="_blank" rel="noopener">GitHub &rarr;</a>
+        </li>
+        <li class="work work--mcp">
+          <span class="work__tag">MCP</span>
+          <h2>CodeQuest MCP</h2>
+          <p>Превращает работу над кодом в RPG: уровень, опыт и квесты из реальных проблем в коде.</p>
+          <a class="work__link" href="https://github.com/aleks-fw/rpg-game-MCP" target="_blank" rel="noopener">GitHub &rarr;</a>
+        </li>
+      </ul>
+    </section>
+    </div>
+
+    <div class="view" data-view="mcp" hidden>
+    <section class="mcpp" aria-labelledby="mcpTitle">
+      <div class="mcpp__head">
+        <h2 role="heading" aria-level="1" id="mcpTitle">мои <span class="mark mark--sm">MCP</span>-серверы</h2>
+        <p class="cap">// инструменты, которые я сделал</p>
+      </div>
+      <div class="mcpp__grid">
+        <article class="win">
+          <div class="win__bar"><svg class="win__icon" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/><path d="M8 11l2.2 2.2L14.5 9"/></svg><span>codecheck-mcp</span><button class="win__tag" type="button" title="Нажми, чтобы сменить написание">MCP</button><b class="win__px" aria-hidden="true"><s></s><s></s><s></s></b></div>
+          <div class="win__body">
+            <p class="win__kind">Проверка сайтов</p>
+            <h2>CodeCheck MCP</h2>
+            <p class="win__text">Проверяет готовый сайт в настоящем браузере на разных размерах экрана и находит проблемы. К каждой находке прикладывает скриншот, чтобы ИИ мог сразу её исправить.</p>
+            <div class="win__url">
+              <a class="win__link" href="https://github.com/aleks-fw/CodeCheck-MCP" target="_blank" rel="noopener">https://github.com/aleks-fw/CodeCheck-MCP</a>
+              <button class="copy" type="button" data-copy="https://github.com/aleks-fw/CodeCheck-MCP" aria-label="Скопировать ссылку" title="Скопировать ссылку"><svg class="copy__ico copy__ico--copy" viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15H4a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v1"/></svg><svg class="copy__ico copy__ico--ok" viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></button>
+            </div>
+            <ul class="win__chips"><li>Браузер Playwright</li><li>Доступность</li><li>Скорость</li><li>Безопасность</li><li>SEO</li></ul>
+          </div>
+        </article>
+        <article class="win">
+          <div class="win__bar"><svg class="win__icon" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1L3.2 9.5l6.1-.9L12 3z"/></svg><span>codequest-mcp</span><button class="win__tag" type="button" title="Нажми, чтобы сменить написание">MCP</button><b class="win__px" aria-hidden="true"><s></s><s></s><s></s></b></div>
+          <div class="win__body">
+            <p class="win__kind">Игра для разработчика</p>
+            <h2>CodeQuest MCP</h2>
+            <p class="win__text">Превращает работу над кодом в RPG: у проекта есть уровень, опыт и квесты из реальных проблем в коде. Опыт даётся только после того, как проверка подтвердила, что проблема исправлена.</p>
+            <div class="win__url">
+              <a class="win__link" href="https://github.com/aleks-fw/rpg-game-MCP" target="_blank" rel="noopener">https://github.com/aleks-fw/rpg-game-MCP</a>
+              <button class="copy" type="button" data-copy="https://github.com/aleks-fw/rpg-game-MCP" aria-label="Скопировать ссылку" title="Скопировать ссылку"><svg class="copy__ico copy__ico--copy" viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15H4a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v1"/></svg><svg class="copy__ico copy__ico--ok" viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></button>
+            </div>
+            <ul class="win__chips"><li>Уровни 1–50</li><li>Опыт и статы</li><li>Квесты из кода</li><li>Проверка сканером</li></ul>
+          </div>
+        </article>
+      </div>
+    </section>
+    </div>
+
+    <div class="view" data-view="support" hidden>
+    <section class="help" aria-labelledby="helpTitle">
+      <div class="os os--center">
+        <span class="stamp">SUPPORT.SH</span>
+        <h2 role="heading" aria-level="1" id="helpTitle">ИИ-<span class="mark mark--sm">ПОДДЕРЖКА</span></h2>
+        <p>Если что-то непонятно, спроси помощника. Он отвечает сразу, в любое время. Пока он работает по готовым ответам, настоящую нейросеть подключим позже.</p>
+        <button class="btn btn--pink btn--big" id="openChat" type="button">ПОДДЕРЖКА</button>
+        <span class="status"><i class="dot"></i> онлайн</span>
+        <pre class="term" aria-hidden="true">$ uname -a
+&gt; fopka-os 1.0
+$ ./support.sh
+[ INFO  ]  loading answers
+[ INFO  ]  mounting /home/fopa
+[ READY ]  welcome back</pre>
+      </div>
+    </section>
+    </div>
+    <div class="view" data-view="game" hidden>
+      <section class="game" id="gameRoot" aria-label="Игра"></section>
+    </div>
+    <div class="view" data-view="os" hidden>
+      <section class="desk" id="desk" aria-label="OS-режим">
+        <div class="desk__area" id="deskArea">
+          <ul class="desk__icons">
+            <li><button class="dicon" type="button" data-app="folio"><i class="dicon__pic dicon__pic--folio" aria-hidden="true"></i><span>Портфолио</span></button></li>
+            <li><button class="dicon" type="button" data-app="player"><i class="dicon__pic dicon__pic--player" aria-hidden="true"></i><span>Плеер</span></button></li>
+            <li><button class="dicon" type="button" data-app="chat"><i class="dicon__pic dicon__pic--chat" aria-hidden="true"></i><span>Чат</span></button></li>
+            <li><button class="dicon" type="button" data-app="game"><i class="dicon__pic dicon__pic--game" aria-hidden="true"></i><span>Игра</span></button></li>
+          </ul>
+        </div>
+        <div class="desk__bar">
+          <button class="dstart" id="deskStart" type="button" aria-expanded="false" aria-controls="deskMenu">FOPKA</button>
+          <div class="dmenu" id="deskMenu" hidden>
+            <p>OS-режим сделан ради прикола.</p>
+            <button class="dmenu__btn" id="deskExit" type="button">Выйти на обычный сайт</button>
+          </div>
+          <div class="desk__tasks" id="deskTasks"></div>
+          <span class="desk__clock" id="deskClock">00:00</span>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer class="foot">
+    <div class="wrap"><span>© 2026 FOPKA · сделано на пикселях</span><span id="contact">Связь: Telegram <a href="https://t.me/fopa">@fopa</a></span></div>
+  </footer>
+
+  <div class="mini" id="mini" role="region" aria-label="Мини-плеер" hidden>
+    <div class="player__bg mini__bg" id="miniBg" aria-hidden="true"></div>
+    <div class="mini__eq" id="miniEq" aria-hidden="true"><i></i><i></i><i></i></div>
+    <div class="mini__meta"><b id="miniTitle">Pixel Rain</b><span id="miniTime">0:00</span></div>
+    <button class="mini__btn" id="miniPrev" type="button" aria-label="Предыдущий трек">&lt;&lt;</button>
+    <button class="mini__btn mini__btn--main" id="miniPlay" type="button" aria-label="Играть или пауза">&#9654;</button>
+    <button class="mini__btn" id="miniNext" type="button" aria-label="Следующий трек">&gt;&gt;</button>
+    <button class="mini__close" id="miniClose" type="button" aria-label="Закрыть мини-плеер" title="Закрыть">X</button>
+    <div class="mini__bar" aria-hidden="true"><div class="mini__fill" id="miniFill"></div></div>
+  </div>
+
+  <div class="tmenu" id="tmenu" hidden>
+    <div class="tmenu__back" data-tclose></div>
+    <div class="tmenu__box" role="dialog" aria-modal="true" aria-labelledby="tmenuTitle">
+      <div class="tmenu__head">
+        <button class="tmenu__x tmenu__back-btn" id="tdetBack" type="button" hidden>&larr; Назад</button>
+        <h2 id="tmenuTitle">Треки</h2>
+        <button class="tmenu__x" type="button" data-tclose aria-label="Закрыть">X</button>
+      </div>
+      <ol class="tmenu__list" id="tmenuList"></ol>
+      <section class="tdet" id="tdet" hidden aria-label="Плеер трека">
+        <img class="tdet__art" id="tdetArt" src="img/tracks/a1.png" width="256" height="256" alt="">
+        <div class="tdet__meta"><span class="tdet__n" id="tdetN">01</span><b class="tdet__t" id="tdetT"></b><span class="tdet__m" id="tdetM"></span></div>
+        <div class="tdet__bar" id="tdetBar" role="slider" tabindex="0" aria-label="Перемотка" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><div class="tdet__fill" id="tdetFill"></div></div>
+        <div class="tdet__times"><span id="tdetCur">0:00</span><span id="tdetTot">0:00</span></div>
+        <div class="tdet__ctl">
+          <button class="tmenu__x" id="tdetPrev" type="button" aria-label="Предыдущий трек">&lt;&lt;</button>
+          <button class="tmenu__x tdet__play" id="tdetPlay" type="button" aria-label="Играть или пауза">&#9654;</button>
+          <button class="tmenu__x" id="tdetNext" type="button" aria-label="Следующий трек">&gt;&gt;</button>
+          <button class="tmenu__x tdet__mode" id="tdetMode" data-modebtn type="button"><svg class="m-repeat" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="square"><path d="M4 9h14l-3-3M20 15H6l3 3"/></svg><svg class="m-order" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="square"><path d="M4 5v14M8 12h12m-5-5l5 5-5 5"/></svg><svg class="m-random" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="square"><path d="M3 7h4l10 10h4M3 17h4l3-3M14 10l3-3h4M18 4l3 3-3 3M18 14l3 3-3 3"/></svg></button>
+        </div>
+        <div class="tdet__rate" id="tdetRate" role="group" aria-label="Скорость"></div>
+      </section>
+    </div>
+  </div>
+
+  <div class="modal" id="modal" hidden>
+    <div class="modal__back" data-close></div>
+    <div class="chat" role="dialog" aria-modal="true" aria-labelledby="chatTitle">
+      <div class="chat__head">
+        <span id="chatTitle">ИИ-ПОДДЕРЖКА</span>
+        <button class="snd" id="sound" type="button" aria-pressed="true">ЗВУК: ВКЛ</button>
+        <button class="x" type="button" data-close aria-label="Закрыть">X</button>
+      </div>
+      <div class="chat__log" id="log" aria-live="polite"></div>
+      <div class="chat__quick" id="quick"></div>
+      <form class="chat__form" id="form" autocomplete="off">
+        <input id="input" type="text" maxlength="300" placeholder="Напиши вопрос..." aria-label="Сообщение">
+        <button class="btn btn--yellow" type="submit">ОК</button>
+      </form>
+    </div>
+  </div>
+
+  <script src="sfx.js"></script>
+  <script src="lang.js"></script>
+  <script src="theme.js"></script>
+  <script src="copy.js"></script>
+  <script src="chat.js"></script>
+  <script src="tracks-data.js"></script>
+  <script src="script.js"></script>
+  <script src="tracks-menu.js"></script>
+  <script src="os/wlogic.js"></script>
+  <script src="os/os.js"></script>
+  <script src="game/three.min.js"></script>
+  <script src="game/logic.js"></script>
+  <script src="game/engine.js"></script>
+  <script src="game/audio.js"></script>
+  <script src="game/world.js"></script>
+  <script src="game/bosses.js"></script>
+  <script src="game/play.js"></script>
+  <script src="game/lobby.js"></script>
+  <script src="game/intro3d.js"></script>
+  <script src="game/intro.js"></script>
+</body>
+</html>

@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://aleks-fw.github.io/mysite/sitemap.xml

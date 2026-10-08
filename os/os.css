@@ -1,0 +1,54 @@
+.osinv { grid-column: 1 / -1; display: grid; grid-template-columns: minmax(0, 560px); gap: 14px; justify-items: start; margin: var(--section) 0; }
+.osinv h2 { margin: 0; }
+.osinv .term { margin: 0; width: min(560px, 100%); }
+.boot__l { display: block; }
+.boot__l[hidden] { display: none; }
+.osinv__btns { display: flex; flex-wrap: wrap; gap: 12px; }
+.osinv__note { margin: 0; color: var(--muted); font-size: 14px; }
+
+.desk { position: relative; border: 3px solid var(--line); background: var(--bg2); display: flex; flex-direction: column; height: min(74vh, 640px); min-height: 460px; margin-bottom: var(--section); }
+.desk__area { position: relative; flex: 1; overflow: hidden;
+  background-image: linear-gradient(var(--line-d) 1px, transparent 1px), linear-gradient(90deg, var(--line-d) 1px, transparent 1px); background-size: 24px 24px; }
+.desk__icons { list-style: none; margin: 0; padding: 14px; display: grid; gap: 14px; width: 104px; }
+.dicon { width: 100%; display: grid; justify-items: center; gap: 6px; background: transparent; border: 2px solid transparent; color: var(--text); font-family: var(--mono); font-size: 12px; padding: 6px 2px; cursor: pointer; }
+.dicon:hover { border-color: var(--line); }
+.dicon:focus-visible { outline: 3px solid var(--orange); outline-offset: 2px; }
+.dicon__pic { width: 44px; height: 44px; background: var(--block); border: 2px solid var(--ink-d); box-shadow: 4px 4px 0 var(--pink); display: block; }
+.dicon__pic--folio { background: var(--orange); }
+.dicon__pic--player { background: var(--pink-l); }
+.dicon__pic--chat { background: #3ec8d8; }
+.dicon__pic--game { background: #7bd88f; }
+
+.desk__bar { position: relative; display: flex; align-items: center; gap: 8px; padding: 6px 8px; background: var(--block); color: #fff; border-top: 3px solid var(--ink-d); font-family: var(--mono); font-size: 13px; }
+.dstart { background: var(--pink); color: #fff; border: 2px solid var(--ink-d); font: inherit; font-weight: 700; padding: 6px 12px; cursor: pointer; }
+.dstart:focus-visible, .dtask:focus-visible, .dmenu__btn:focus-visible, .dwin__btn:focus-visible { outline: 3px solid var(--orange); outline-offset: 2px; }
+.desk__tasks { flex: 1; display: flex; gap: 6px; overflow: hidden; }
+.dtask { background: transparent; color: #fff; border: 2px solid #b5afd6; font: inherit; padding: 5px 10px; cursor: pointer; }
+.dtask[aria-pressed="true"] { background: #fff; color: var(--ink-d); }
+.desk__clock { margin-left: auto; }
+.dmenu { position: absolute; left: 8px; bottom: 100%; margin-bottom: 4px; background: var(--bg); color: var(--text); border: 3px solid var(--line); padding: 12px; display: grid; gap: 10px; width: 240px; z-index: 1000; }
+.dmenu[hidden] { display: none; }
+.dmenu p { margin: 0; font-size: 13px; }
+.dmenu__btn { background: var(--pink); color: #fff; border: 2px solid var(--ink-d); font: inherit; padding: 8px; cursor: pointer; }
+
+.dwin { position: absolute; background: var(--bg); border: 3px solid var(--line); box-shadow: 6px 6px 0 var(--ink-d); display: flex; flex-direction: column; min-width: 240px; }
+.dwin[hidden] { display: none; }
+.dwin.is-active { border-color: var(--pink); }
+.dwin__head { display: flex; align-items: center; gap: 6px; background: var(--block); color: #fff; padding: 6px 8px; font-family: var(--mono); font-size: 13px; cursor: grab; touch-action: none; user-select: none; }
+.dwin__title { flex: 1; }
+.dwin__btn { background: transparent; color: #fff; border: 2px solid #b5afd6; width: 28px; height: 28px; font: inherit; line-height: 1; cursor: pointer; }
+.dwin__body { flex: 1; overflow: auto; padding: 12px; }
+
+.dplayer { display: grid; gap: 10px; justify-items: center; text-align: center; }
+.dplayer img { width: 120px; height: 120px; image-rendering: pixelated; border: 2px solid var(--line); }
+.dplayer__bar { width: 100%; height: 8px; background: var(--line-d); }
+.dplayer__bar i { display: block; height: 100%; width: 0; background: var(--pink); }
+.dplayer__ctl { display: flex; gap: 8px; }
+.dplayer .pbtn:not(.pbtn--main) { color: var(--text); border-color: var(--line); background: transparent; }
+
+@media (max-width: 700px) {
+  .desk { height: 70vh; }
+  .dwin { inset: 0 0 0 0 !important; width: auto !important; height: auto !important; box-shadow: none; }
+  .dwin__head { cursor: default; }
+}
+@media (prefers-reduced-motion: reduce) { .desk * { transition: none !important; animation: none !important; } }
