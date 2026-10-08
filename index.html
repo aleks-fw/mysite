@@ -24,7 +24,6 @@
   <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="game/game.css">
   <link rel="stylesheet" href="tracks-menu.css">
-  <link rel="stylesheet" href="os/os.css">
 </head>
 <body id="top">
   <div class="news" role="region" aria-label="Новости">
@@ -122,16 +121,6 @@
             <button class="pbtn pbtn--mode" id="mode" data-modebtn type="button"><svg class="m-repeat" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="square"><path d="M4 9h14l-3-3M20 15H6l3 3"/></svg><svg class="m-order" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="square"><path d="M4 5v14M8 12h12m-5-5l5 5-5 5"/></svg><svg class="m-random" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="square"><path d="M3 7h4l10 10h4M3 17h4l3-3M14 10l3-3h4M18 4l3 3-3 3M18 14l3 3-3 3"/></svg></button>
           </div>
         </div>
-      </section>
-      <section class="osinv" id="osInvite" aria-labelledby="osInvTitle">
-        <span class="cap">// legacy mode / как раньше</span>
-        <h2 id="osInvTitle">Запустить <span class="mark mark--sm">OS-РЕЖИМ</span>?</h2>
-        <pre class="term" aria-hidden="true"><span class="boot__l">$ cd /var/fopka-os</span><span class="boot__l">$ ./boot.sh</span><span class="boot__l">[ OK ] тема загружена</span><span class="boot__l">[ OK ] ~/portfolio, ~/music, ~/games подключены</span><span class="boot__l">[ OK ] демон музыки запущен</span><span class="boot__l">[ READY ] десктоп-режим готов_</span></pre>
-        <div class="osinv__btns">
-          <a class="hbtn hbtn--pink" href="#/os">&#8599; Открыть OS-режим</a>
-          <a class="hbtn" href="#top">&larr; Остаться на сайте</a>
-        </div>
-        <p class="osinv__note">Эта версия сделана ради прикола: обычного сайта вполне достаточно.</p>
       </section>
     </div>
     </div>
@@ -253,27 +242,6 @@ $ ./support.sh
     <div class="view" data-view="game" hidden>
       <section class="game" id="gameRoot" aria-label="Игра"></section>
     </div>
-    <div class="view" data-view="os" hidden>
-      <section class="desk" id="desk" aria-label="OS-режим">
-        <div class="desk__area" id="deskArea">
-          <ul class="desk__icons">
-            <li><button class="dicon" type="button" data-app="folio"><i class="dicon__pic dicon__pic--folio" aria-hidden="true"></i><span>Портфолио</span></button></li>
-            <li><button class="dicon" type="button" data-app="player"><i class="dicon__pic dicon__pic--player" aria-hidden="true"></i><span>Плеер</span></button></li>
-            <li><button class="dicon" type="button" data-app="chat"><i class="dicon__pic dicon__pic--chat" aria-hidden="true"></i><span>Чат</span></button></li>
-            <li><button class="dicon" type="button" data-app="game"><i class="dicon__pic dicon__pic--game" aria-hidden="true"></i><span>Игра</span></button></li>
-          </ul>
-        </div>
-        <div class="desk__bar">
-          <button class="dstart" id="deskStart" type="button" aria-expanded="false" aria-controls="deskMenu">FOPKA</button>
-          <div class="dmenu" id="deskMenu" hidden>
-            <p>OS-режим сделан ради прикола.</p>
-            <button class="dmenu__btn" id="deskExit" type="button">Выйти на обычный сайт</button>
-          </div>
-          <div class="desk__tasks" id="deskTasks"></div>
-          <span class="desk__clock" id="deskClock">00:00</span>
-        </div>
-      </section>
-    </div>
   </main>
 
   <footer class="foot">
@@ -341,8 +309,6 @@ $ ./support.sh
   <script src="tracks-data.js"></script>
   <script src="script.js"></script>
   <script src="tracks-menu.js"></script>
-  <script src="os/wlogic.js"></script>
-  <script src="os/os.js"></script>
   <script src="game/three.min.js"></script>
   <script src="game/logic.js"></script>
   <script src="game/engine.js"></script>

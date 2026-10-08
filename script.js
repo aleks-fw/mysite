@@ -335,17 +335,17 @@ requestAnimationFrame(tick);
    РАЗДЕЛЫ: весь сайт в одном документе, поэтому музыка не прерывается при переходах
    ===================================================== */
 const navLinks = [...document.querySelectorAll(".nav__a")];
-const TITLES = { home: "FOPKA", portfolio: "Портфолио — FOPKA", mcp: "MCP — FOPKA", support: "Поддержка — FOPKA", game: "Игра — FOPKA", os: "OS-режим — FOPKA" };
+const TITLES = { home: "FOPKA", portfolio: "Портфолио — FOPKA", mcp: "MCP — FOPKA", support: "Поддержка — FOPKA", game: "Игра — FOPKA" };
 let view = "home";
 
 const routeFromHash = () => {
-  const m = /^#\/(portfolio|mcp|support|game|os)$/.exec(location.hash);
+  const m = /^#\/(portfolio|mcp|support|game)$/.exec(location.hash);
   return m ? m[1] : "home";
 };
 
 // мини-плеер идёт за пользователем по всем разделам, кроме главной (там есть большой плеер)
 function updateMini() {
-  $("mini").hidden = !(view !== "home" && view !== "game" && view !== "os" && everPlayed);
+  $("mini").hidden = !(view !== "home" && view !== "game" && everPlayed);
 }
 
 function updateNav() {
