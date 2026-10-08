@@ -159,7 +159,7 @@ h1 { font-weight: 800; font-size: clamp(38px, 4.7vw, 84px); line-height: 1.12; l
 :root[data-theme="dark"] .cat--closed { display: block !important; }
 .photo__tag { position: absolute; top: -8px; right: -6px; z-index: 2; background: var(--pink); color: var(--on-pink); font-family: var(--mono); font-size: 14px; letter-spacing: .14em; padding: 6px 16px; box-shadow: 4px 4px 0 var(--line); transform: rotate(-2deg); }
 .photo__cap { position: absolute; left: -14px; bottom: 8px; z-index: 2; background: var(--paper); color: var(--pink-t); font-family: "Caveat", cursive; font-weight: 600; font-size: 26px; line-height: 1; padding: 9px 20px; box-shadow: 3px 3px 0 var(--line-d); transform: rotate(-3deg); }
-.photo__cap::before { content: ""; display: inline-block; width: .8em; height: .8em; margin-right: 8px; background: currentColor; vertical-align: -.02em; -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M5 19 L19 5 M8 5 H19 V16' stroke='black' stroke-width='3.5' fill='none' stroke-linecap='square'/%3E%3C/svg%3E") center / contain no-repeat; mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M5 19 L19 5 M8 5 H19 V16' stroke='black' stroke-width='3.5' fill='none' stroke-linecap='square'/%3E%3C/svg%3E") center / contain no-repeat; }
+.photo__arr { display: inline-block; width: .8em; height: .8em; margin-right: 8px; vertical-align: -.02em; }
 
 /* тёмная тема: нейтральные серые вместо сиреневых тонов */
 :root[data-theme="dark"] .term { background: #48484d; border-color: #8e8e94; }
