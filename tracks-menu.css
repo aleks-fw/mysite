@@ -61,3 +61,16 @@ body.tmenu-open { overflow: hidden; }
 .tdet__mode { display: inline-flex; align-items: center; justify-content: center; }
 .tdet__ctl { flex-wrap: wrap; justify-content: center; }
 @media (prefers-reduced-motion: reduce) { [data-modebtn].is-anim svg { animation: none; } }
+
+/* телефон: окно трека компактнее и всегда помещается в экран */
+@media (max-width: 600px) {
+  .tmenu__box { max-height: calc(100dvh - 24px); }
+  .tdet { gap: 8px; padding: 12px 12px 14px; }
+  .tdet__art { width: min(150px, 38vw); box-shadow: 4px 4px 0 var(--pink); }
+  .tdet__t { font-size: 18px; }
+  .tdet__n, .tdet__m { font-size: 11px; }
+  .tdet__ctl { gap: 8px; }
+  .tdet__ctl .tmenu__x { min-width: 44px; padding: 8px 10px; }
+  .tdet__rate { width: 100%; gap: 5px; flex-wrap: nowrap; }
+  .tdet__rate .tmenu__x { flex: 1 1 0; min-width: 0; padding: 6px 0; text-align: center; font-size: 11px; }
+}

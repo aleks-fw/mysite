@@ -32,6 +32,7 @@ const I18N = {
   "Выйти на обычный сайт": "Back to the regular site",
   "OS-режим — NYAN": "OS mode — NYAN",
   // меню
+  "Меню": "Menu",
   "Главная": "Home",
   "Портфолио": "Portfolio",
   "Поддержка": "Support",

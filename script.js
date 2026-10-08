@@ -353,6 +353,19 @@ function updateNav() {
   navLinks.forEach((a) => a.classList.toggle("is-active", a.getAttribute("href") === active));
 }
 
+// бургер-меню (телефон): открыть/закрыть, закрывается по ссылке, Esc и клику снаружи
+(function () {
+  const top = document.querySelector(".top"), btn = document.getElementById("burger");
+  if (!top || !btn) return;
+  const set = (on) => { top.classList.toggle("is-open", on); btn.setAttribute("aria-expanded", String(on)); };
+  btn.addEventListener("click", () => set(!top.classList.contains("is-open")));
+  document.getElementById("topMenu").addEventListener("click", (e) => { if (e.target.closest(".nav__a")) set(false); });
+  document.addEventListener("click", (e) => { if (top.classList.contains("is-open") && !top.contains(e.target)) set(false); });
+  document.addEventListener("keydown", (e) => { if (e.key === "Escape" && top.classList.contains("is-open")) { set(false); btn.focus(); } });
+  window.addEventListener("hashchange", () => set(false));
+  window.matchMedia("(min-width: 801px)").addEventListener("change", () => set(false));
+})();
+
 function applyRoute(initial) {
   const v = routeFromHash();
   const changed = v !== view || initial;
@@ -370,9 +383,6 @@ function applyRoute(initial) {
     }
   }
   updateNav();
-  // на телефоне меню прокручивается: показываем активный пункт
-  const act = navLinks.find((a) => a.classList.contains("is-active"));
-  if (act && act.parentElement.scrollWidth > act.parentElement.clientWidth) act.parentElement.scrollLeft = act.offsetLeft - 20;
   updateMini();
   if (window.NyanLobby) { if (v === "game") NyanLobby.enter(); else NyanLobby.exit(); }
 }
