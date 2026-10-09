@@ -269,7 +269,7 @@ const I18N = {
   "Портфолио — NYAN": "Portfolio — NYAN",
   "Поддержка — NYAN": "Support — NYAN",
   // меню треков
-  "Треки": "Tracks", "Повтор трека": "Repeat track", "По порядку": "In order", "Случайно": "Shuffle", "← Назад": "← Back", "Плеер трека": "Track player", "Перемотка": "Seek", "Скорость": "Speed", "Аватарка трека": "Track cover",
+  "Треки": "Tracks", "Повтор трека": "Repeat track", "По порядку": "In order", "Случайно": "Shuffle", "← Назад": "← Back", "Плеер трека": "Track player", "Перемотка": "Seek", "Скорость": "Speed", "Аватарка трека": "Track cover", "Предыдущий фон": "Previous background", "Следующий фон": "Next background", "Без фона": "No background", "Ночной город": "Night city", "Фиолетовый лес": "Purple forest", "Сакура": "Cherry blossom", "Ретро-рабочий стол": "Retro desktop",
   "дождливый": "rainy", "ночной": "night", "сладкий": "sweet", "тихий": "quiet", "бодрый": "upbeat",
   "уютный": "cozy", "странный": "weird", "мечтательный": "dreamy", "быстрый": "fast", "грустный": "sad",
   // динамические тексты чата

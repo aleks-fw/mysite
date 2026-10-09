@@ -159,10 +159,10 @@ function loadTrack(n) {
   $("title").textContent = TRACKS[cur].title;
   $("miniTitle").textContent = TRACKS[cur].title;
   $("cover").src = TRACKS[cur].art;
-  // аватарка трека на фоне главного и мини-плеера, при смене трека плавно проявляется
+  // сцена на фоне главного и мини-плеера (подобрана по цвету аватарки трека), при смене трека плавно проявляется
   ["playerBg", "miniBg"].forEach((id) => {
     const bg = $(id);
-    bg.style.backgroundImage = 'url("' + TRACKS[cur].art + '")';
+    bg.style.backgroundImage = 'url("img/bg/' + TRACKS[cur].bg + '.png")';
     bg.classList.remove("is-new"); void bg.offsetWidth; bg.classList.add("is-new");
   });
   $("cover").alt = "Аватарка трека " + TRACKS[cur].title;
@@ -215,25 +215,38 @@ const bars = [...document.querySelectorAll("#eq i")];
 const miniBars = [...document.querySelectorAll("#miniEq i")];
 const bins = [1, 2, 4, 6, 9];
 const freq = new Uint8Array(32);
+const tickEls = { fill: $("fill"), tCur: $("tCur"), bar: $("bar"), miniFill: $("miniFill"), miniTime: $("miniTime") };
+let lastPct = "", lastCur = "", lastMini = "", lastAria = "", idleSet = false;
 function tick() {
-  if (ctx) {
-    const el = Math.max(0, ctx.currentTime - startTime) % loopDur();
-    const pct = (el / loopDur()) * 100;
-    $("fill").style.width = pct + "%";
-    $("tCur").textContent = fmt(el);
-    $("bar").setAttribute("aria-valuenow", String(Math.round(pct)));
-    $("miniFill").style.width = pct + "%";
-    $("miniTime").textContent = fmt(el) + " / " + fmt(loopDur());
-    if (playing) {
-      analyser.getByteFrequencyData(freq);
-      bars.forEach((b, k) => { b.style.height = Math.max(10, (freq[bins[k]] / 255) * 100) + "%"; });
-      miniBars.forEach((b, k) => { b.style.height = Math.max(15, (freq[[1, 4, 8][k]] / 255) * 100) + "%"; });
-    } else {
-      bars.forEach((b) => { b.style.height = "12%"; });
-      miniBars.forEach((b) => { b.style.height = "20%"; });
-    }
-  }
   requestAnimationFrame(tick);
+  if (document.hidden || !ctx) return;
+  const dur = loopDur();
+  const el = Math.max(0, ctx.currentTime - startTime) % dur;
+  const pct = ((el / dur) * 100).toFixed(1) + "%";
+  if (pct !== lastPct) {
+    lastPct = pct;
+    tickEls.fill.style.width = pct;
+    tickEls.miniFill.style.width = pct;
+  }
+  const cur = fmt(el);
+  if (cur !== lastCur) {
+    lastCur = cur;
+    tickEls.tCur.textContent = cur;
+    const mini = cur + " / " + fmt(dur);
+    if (mini !== lastMini) { lastMini = mini; tickEls.miniTime.textContent = mini; }
+    const aria = String(Math.round((el / dur) * 100));
+    if (aria !== lastAria) { lastAria = aria; tickEls.bar.setAttribute("aria-valuenow", aria); }
+  }
+  if (playing) {
+    idleSet = false;
+    analyser.getByteFrequencyData(freq);
+    for (let k = 0; k < bars.length; k++) bars[k].style.height = Math.max(10, (freq[bins[k]] / 255) * 100) + "%";
+    for (let k = 0; k < miniBars.length; k++) miniBars[k].style.height = Math.max(15, (freq[[1, 4, 8][k]] / 255) * 100) + "%";
+  } else if (!idleSet) {
+    idleSet = true;
+    bars.forEach((b) => { b.style.height = "12%"; });
+    miniBars.forEach((b) => { b.style.height = "20%"; });
+  }
 }
 
 // перемотка по тактам: frac от 0 до 1

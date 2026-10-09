@@ -15,11 +15,10 @@
       const li = document.createElement("li");
       const b = document.createElement("button");
       b.type = "button"; b.className = "tmenu__item"; b.dataset.i = String(i);
-      b.innerHTML = '<img class="tmenu__av" alt="" width="40" height="40"><span class="tmenu__n"></span><span class="tmenu__t"></span><span class="tmenu__m"></span><span class="tmenu__eq" aria-hidden="true"><i></i><i></i><i></i></span>';
+      b.innerHTML = '<img class="tmenu__av" alt="" width="40" height="40"><span class="tmenu__n"></span><span class="tmenu__t"></span><span class="tmenu__eq" aria-hidden="true"><i></i><i></i><i></i></span>';
       b.querySelector(".tmenu__av").src = t.art;
       b.querySelector(".tmenu__n").textContent = String(i + 1).padStart(2, "0");
       b.querySelector(".tmenu__t").textContent = t.title;
-      b.querySelector(".tmenu__m").textContent = tr(t.mood) + " · " + t.bpm + " BPM";
       li.appendChild(b); list.appendChild(li);
       return b;
     });
@@ -45,13 +44,44 @@
     return b;
   });
 
+  // фон окна трека на выбор: картинки подогнаны под окно (img/bg), выбор запоминается
+  const BGS = [
+    { id: "city", name: "Ночной город" }, { id: "forest", name: "Фиолетовый лес" },
+    { id: "sakura", name: "Сакура" }, { id: "retro", name: "Ретро-рабочий стол" }
+  ];
+  const BG_KEY = "nyan-tbg";
+  const ORDER = ["none", ...BGS.map((b) => b.id)];
+  let bgId = "city";
+  try { const v = localStorage.getItem(BG_KEY); if (ORDER.includes(v)) bgId = v; } catch (e) { /* без хранилища остаётся фон по умолчанию */ }
+  const bgName = () => tr(bgId === "none" ? "Без фона" : BGS.find((b) => b.id === bgId).name);
+  let nameTimer = 0;
+  function applyBg(announce) {
+    if (bgId === "none") { det.removeAttribute("data-bg"); det.style.backgroundImage = ""; }
+    else { det.dataset.bg = bgId; det.style.backgroundImage = 'url("img/bg/' + bgId + '.png")'; }
+    det.classList.toggle("tdet--bg", bgId !== "none");
+    $("tdetBgPrev").setAttribute("aria-label", tr("Предыдущий фон")); $("tdetBgPrev").title = tr("Предыдущий фон");
+    $("tdetBgNext").setAttribute("aria-label", tr("Следующий фон")); $("tdetBgNext").title = tr("Следующий фон");
+    const tag = $("tdetBgName");
+    if (announce) {                                   // подпись с названием фона показываем на секунду
+      tag.textContent = bgName(); tag.classList.add("is-on");
+      clearTimeout(nameTimer); nameTimer = setTimeout(() => tag.classList.remove("is-on"), 1200);
+    }
+  }
+  function stepBg(d) {
+    bgId = ORDER[(ORDER.indexOf(bgId) + d + ORDER.length) % ORDER.length];
+    try { localStorage.setItem(BG_KEY, bgId); } catch (err) { /* не критично */ }
+    applyBg(true);
+  }
+  $("tdetBgPrev").addEventListener("click", () => stepBg(-1));
+  $("tdetBgNext").addEventListener("click", () => stepBg(1));
+
   function fillDetail() {
+    applyBg();
     const c = M.current(), t = M.tracks[c];
     $("tdetArt").src = t.art;
     $("tdetArt").alt = tr("Аватарка трека") + " " + t.title;
     $("tdetN").textContent = String(c + 1).padStart(2, "0") + " / " + String(M.tracks.length).padStart(2, "0");
     $("tdetT").textContent = t.title;
-    $("tdetM").textContent = tr(t.mood) + " · " + t.bpm + " BPM";
     $("tdetPlay").innerHTML = M.isPlaying() ? "&#10074;&#10074;" : "&#9654;&#xFE0E;";
     rateBtns.forEach((b) => b.setAttribute("aria-pressed", String(Number(b.dataset.rate) === M.rate())));
   }

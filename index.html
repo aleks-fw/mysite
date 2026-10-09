@@ -38,8 +38,9 @@
 
   <header class="top">
     <div class="wrap top__in">
-      <a class="logo" href="#top" aria-label="NYAN, на главную">nyan<i class="logo__dot" aria-hidden="true"></i>fm</a>
+      <a class="logo" href="#top" aria-label="NYAN, на главную">n<span class="logo__y">y</span>an<i class="logo__dot" aria-hidden="true"></i>fm</a>
       <div class="top__right" id="topMenu">
+        <div class="top__art" aria-hidden="true"></div>
         <nav class="nav" aria-label="Разделы">
           <a class="nav__a is-active" href="#top">Главная</a>
           <a class="nav__a" href="#/portfolio">Портфолио</a>
@@ -80,7 +81,7 @@
     <div class="stats" role="list">
       <div class="stat" role="listitem"><b>404</b><span>страница не найдена</span></div>
       <div class="stat" role="listitem"><b>1947</b><span>год первого жука-бага</span></div>
-      <div class="stat" role="listitem"><b>пока 2</b><span>креатор MCP-серверов</span></div>
+      <div class="stat" role="listitem"><b>2</b><span>креатор MCP-серверов</span></div>
       <div class="stat" role="listitem"><b>5 мин</b><span>«займёт» любая правка</span></div>
     </div>
 
@@ -270,8 +271,11 @@ $ ./support.sh
       </div>
       <ol class="tmenu__list" id="tmenuList"></ol>
       <section class="tdet" id="tdet" hidden aria-label="Плеер трека">
+        <button class="tmenu__x tdet__bgb tdet__bgb--prev" id="tdetBgPrev" type="button" aria-label="Предыдущий фон" title="Предыдущий фон">&lt;</button>
+        <button class="tmenu__x tdet__bgb tdet__bgb--next" id="tdetBgNext" type="button" aria-label="Следующий фон" title="Следующий фон">&gt;</button>
+        <span class="tdet__bgname" id="tdetBgName" aria-live="polite"></span>
         <img class="tdet__art" id="tdetArt" src="img/tracks/a1.png" width="256" height="256" alt="">
-        <div class="tdet__meta"><span class="tdet__n" id="tdetN">01</span><b class="tdet__t" id="tdetT"></b><span class="tdet__m" id="tdetM"></span></div>
+        <div class="tdet__meta"><span class="tdet__n" id="tdetN">01</span><b class="tdet__t" id="tdetT"></b></div>
         <div class="tdet__bar" id="tdetBar" role="slider" tabindex="0" aria-label="Перемотка" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><div class="tdet__fill" id="tdetFill"></div></div>
         <div class="tdet__times"><span id="tdetCur">0:00</span><span id="tdetTot">0:00</span></div>
         <div class="tdet__ctl">
@@ -310,15 +314,16 @@ $ ./support.sh
   <script src="tracks-data.js"></script>
   <script src="script.js"></script>
   <script src="tracks-menu.js"></script>
-  <script src="game/three.min.js"></script>
-  <script src="game/logic.js"></script>
-  <script src="game/engine.js"></script>
-  <script src="game/audio.js"></script>
-  <script src="game/world.js"></script>
-  <script src="game/bosses.js"></script>
-  <script src="game/play.js"></script>
-  <script src="game/lobby.js"></script>
-  <script src="game/intro3d.js"></script>
-  <script src="game/intro.js"></script>
+  <script src="burger-fx.js"></script>
+  <script defer src="game/three.min.js"></script>
+  <script defer src="game/logic.js"></script>
+  <script defer src="game/engine.js"></script>
+  <script defer src="game/audio.js"></script>
+  <script defer src="game/world.js"></script>
+  <script defer src="game/bosses.js"></script>
+  <script defer src="game/play.js"></script>
+  <script defer src="game/lobby.js"></script>
+  <script defer src="game/intro3d.js"></script>
+  <script defer src="game/intro.js"></script>
 </body>
 </html>
