@@ -40,7 +40,8 @@
   --orange-d: #c9a84e;
   color-scheme: dark;
 }
-* { box-sizing: border-box; margin: 0; padding: 0; }
+/* touch-action: manipulation — iOS Safari не приближает страницу двойным тапом, прокрутка и щипок остаются */
+* { box-sizing: border-box; margin: 0; padding: 0; touch-action: manipulation; }
 html { scroll-behavior: smooth; scroll-padding-top: 24px; }
 body {
   background: var(--bg);
