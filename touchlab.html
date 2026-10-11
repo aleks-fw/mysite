@@ -23,7 +23,7 @@
 <body>
 <script>
 (function () {
-  var BUILD = "lab v1";
+  var BUILD = "lab v2";
   var q = new URLSearchParams(location.search).get("m");
   var MODES = {
     a: "A · как сейчас в игре: страница прокручена вниз до упора, touch-action: none",
@@ -32,7 +32,8 @@
     d: "D · страница на середине, touch-action: auto + preventDefault на touchmove",
     e: "E · страница на середине, touch-action: auto, без preventDefault (страница может ехать)",
     f: "F · приём из документации Telegram: внутренний скролл +2px, touch-action: auto",
-    g: "G · как F + overscroll-behavior: none"
+    g: "G · как F + overscroll-behavior: none",
+    h: "H · как в игре (страница на нуле, touch-action: none) + приём Telegram: меняем top/transform во время touchmove"
   };
 
   if (!MODES[q]) {
@@ -44,9 +45,9 @@
     return;
   }
 
-  var rootScroll = "abcde".indexOf(q) >= 0 && q !== "b";
+  var rootScroll = "abcdeh".indexOf(q) >= 0;
   var inner = q === "f" || q === "g";
-  var noneTA = "abc".indexOf(q) >= 0;
+  var noneTA = "abch".indexOf(q) >= 0;
   var useTouch = "def".indexOf(q) >= 0 || q === "g";
   var preventing = q === "d";
 
@@ -80,11 +81,19 @@
     field.addEventListener("pointercancel", function () { cancels++; });
   }
 
+  if (q === "h") {
+    var on = function () { document.documentElement.style.top = "1px"; field.style.transform = "translateZ(0)"; };
+    var off = function () { document.documentElement.style.top = ""; field.style.transform = ""; };
+    field.addEventListener("touchmove", on, { passive: true });
+    field.addEventListener("touchend", off, { passive: true });
+    field.addEventListener("touchcancel", off, { passive: true });
+  }
+
   // стартовая прокрутка: A — до упора вниз, C/D/E — на середину, F/G — на 1px внутри контейнера
   function place() {
     if (rootScroll) {
       var max = document.documentElement.scrollHeight - innerHeight;
-      scrollTo(0, q === "a" ? max : Math.round(max / 2));
+      scrollTo(0, q === "a" ? max : q === "h" ? 0 : Math.round(max / 2));
     }
     if (inner) field.scrollTop = 1;
   }
@@ -93,7 +102,8 @@
   function tick() {
     var max = document.documentElement.scrollHeight - innerHeight;
     hud.textContent = BUILD + "\n" + MODES[q] + "\nscrollY=" + Math.round(scrollY) + "/" + max +
-      (inner ? "  внутр=" + field.scrollTop : "") + "  касаний=" + downs + "  движений=" + moves + "  отмен=" + cancels;
+      (inner ? "  внутр=" + field.scrollTop : "") + "  касаний=" + downs + "  движений=" + moves + "  отмен=" + cancels +
+      "\nTelegramWebviewProxy: " + (typeof window.TelegramWebviewProxy) + "   UA: " + navigator.userAgent.slice(-70);
   }
   setInterval(tick, 200); tick();
 })();

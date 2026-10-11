@@ -28,6 +28,7 @@
     const host = document.getElementById("gameRoot"); if (!host) return;
     S = { host, save: L.loadSave(root.localStorage), cleanup: [], tab: "atk" };
     const stage = mk("div", "game__stage"); S.stage = stage; host.appendChild(stage);
+    guardWindowDrag(stage);
     if (!root.NyanEngine.webglOk()) return showNoGl();
     const canvas = mk("canvas", "game__canvas", null, { "aria-label": "Игровое поле" }); stage.appendChild(canvas);
     S.eng = root.NyanEngine.create(canvas); S.world = root.NyanWorld.create(S.eng);
@@ -48,19 +49,27 @@
     if (S.play) S.play.stop(); if (S.world) S.world.dispose(); if (S.eng) S.eng.dispose();
     S.stage.remove(); S = null; api.phase = "none";
   }
-  // Встроенные браузеры (Telegram) тянут всё окно за пальцем вниз, пока страница стоит на нулевой прокрутке.
-  // На время забега поднимаем поле игры к верхнему краю: страница уже не «наверху», окно не едет за кораблём.
-  function pinStage() {
-    if (!root.matchMedia("(pointer: coarse)").matches) return;
-    const max = document.documentElement.scrollHeight - root.innerHeight;
-    const top = S.stage.getBoundingClientRect().top + root.scrollY;
-    root.scrollTo({ top: Math.min(top, max), behavior: "instant" });
+  // Браузер Telegram следит за touchmove: если у касаемого элемента или его родителей меняется
+  // transform/top/left, он считает, что страница сама двигает элемент, и отменяет свой жест
+  // (перетаскивание всего окна за пальцем). Во время забега меняем эти свойства на значения,
+  // которые ничего не двигают, — окно не едет за кораблём.
+  function guardWindowDrag(stage) {
+    const html = document.documentElement;
+    const on = () => {
+      if (stage.dataset.phase !== "run") return;
+      html.style.top = "1px"; // у не позиционированного html top ничего не двигает
+      stage.style.transform = "translateZ(0)"; // тождественное преобразование
+    };
+    const off = () => { html.style.top = ""; stage.style.transform = ""; };
+    stage.addEventListener("touchmove", on, { passive: true });
+    stage.addEventListener("touchend", off, { passive: true });
+    stage.addEventListener("touchcancel", off, { passive: true });
+    S.cleanup.push(off);
   }
   function setPhase(p) {
     api.phase = p; S.stage.dataset.phase = p;
     S.lobby.hidden = p !== "lobby"; S.hud.hidden = p !== "run" && p !== "paused"; S.over.hidden = p !== "over";
     if (p === "lobby") renderLobby();
-    if (p === "run") pinStage();
   }
   function showNoGl() {
     api.phase = "nogl"; const b = mk("div", "game__nogl");
