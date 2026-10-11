@@ -73,11 +73,10 @@ async function typeInto(el, text) {
   }
 }
 
-async function send(text) {
-  text = text.trim();
-  if (!text || busy) return;
-  busy = true;
-  addMsg("me", text);
+// сообщения, отправленные пока бот печатает, ждут в очереди: ничего не теряется, ответы идут по порядку
+const queue = [];
+
+async function answer(text) {
   const bot = addMsg("bot", tr("печатает..."));
   bot.classList.add("msg--typing");
   try {
@@ -86,7 +85,24 @@ async function send(text) {
   } catch (e) {
     await typeInto(bot, tr("Что-то пошло не так. Попробуй ещё раз или напиши оператору: ") + OPERATOR);
   }
-  busy = false;
+}
+
+async function drain() {
+  if (busy) return;
+  busy = true;
+  try {
+    while (queue.length) await answer(queue.shift());
+  } finally {
+    busy = false;
+  }
+}
+
+function send(text) {
+  text = text.trim();
+  if (!text) return;
+  addMsg("me", text);
+  queue.push(text);
+  drain();
 }
 
 function renderQuick() {
@@ -99,7 +115,7 @@ function openChat(e) {
   if (!$("log").children.length) {
     renderQuick();
     busy = true;
-    typeInto(addMsg("bot"), tr("Привет! Я ИИ-помощник. Спроси про сайт, музыку или как связаться с оператором.")).then(() => { busy = false; });
+    typeInto(addMsg("bot"), tr("Привет! Я ИИ-помощник. Спроси про сайт, музыку или как связаться с оператором.")).then(() => { busy = false; drain(); });
   }
   fitChat();
   $("input").focus();
