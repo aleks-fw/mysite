@@ -101,12 +101,33 @@ function openChat(e) {
     busy = true;
     typeInto(addMsg("bot"), tr("Привет! Я ИИ-помощник. Спроси про сайт, музыку или как связаться с оператором.")).then(() => { busy = false; });
   }
+  fitChat();
   $("input").focus();
 }
 let chatOpener = null;
 function closeChat() {
   $("modal").hidden = true;
+  $("modal").style.top = $("modal").style.height = "";
+  $("modal").style.removeProperty("--vvh");
   if (chatOpener) chatOpener.focus();
+}
+
+// iOS: клавиатура не меняет layout viewport, а Safari сдвигает вид вверх, и fixed-окно уезжает.
+// Поэтому прижимаем окно чата к видимой области (visualViewport) и укладываем чат в её высоту.
+const vv = window.visualViewport;
+let fitH = 0;
+function fitChat() {
+  const m = $("modal");
+  if (!vv || m.hidden) return;
+  m.style.top = vv.offsetTop + "px";
+  m.style.height = vv.height + "px";
+  m.style.setProperty("--vvh", vv.height + "px");
+  if (vv.height !== fitH) $("log").scrollTop = $("log").scrollHeight;
+  fitH = vv.height;
+}
+if (vv) {
+  vv.addEventListener("resize", fitChat);
+  vv.addEventListener("scroll", fitChat);
 }
 
 const soundBtn = $("sound");
