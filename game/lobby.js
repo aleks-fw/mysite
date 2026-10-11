@@ -48,10 +48,19 @@
     if (S.play) S.play.stop(); if (S.world) S.world.dispose(); if (S.eng) S.eng.dispose();
     S.stage.remove(); S = null; api.phase = "none";
   }
+  // Встроенные браузеры (Telegram) тянут всё окно за пальцем вниз, пока страница стоит на нулевой прокрутке.
+  // На время забега поднимаем поле игры к верхнему краю: страница уже не «наверху», окно не едет за кораблём.
+  function pinStage() {
+    if (!root.matchMedia("(pointer: coarse)").matches) return;
+    const max = document.documentElement.scrollHeight - root.innerHeight;
+    const top = S.stage.getBoundingClientRect().top + root.scrollY;
+    root.scrollTo({ top: Math.min(top, max), behavior: "instant" });
+  }
   function setPhase(p) {
     api.phase = p; S.stage.dataset.phase = p;
     S.lobby.hidden = p !== "lobby"; S.hud.hidden = p !== "run" && p !== "paused"; S.over.hidden = p !== "over";
     if (p === "lobby") renderLobby();
+    if (p === "run") pinStage();
   }
   function showNoGl() {
     api.phase = "nogl"; const b = mk("div", "game__nogl");
