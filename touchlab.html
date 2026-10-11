@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex">
+<title>touchlab</title>
+<style>
+  html, body { margin: 0; background: #0b0b1a; color: #fff; font: 15px/1.4 system-ui, -apple-system, sans-serif; }
+  .menu { padding: 16px; max-width: 520px; margin: 0 auto; }
+  .menu h1 { font-size: 20px; margin: 0 0 6px; }
+  .menu p { margin: 0 0 14px; color: #b9b6d8; }
+  .menu a { display: block; margin: 8px 0; padding: 14px; background: #2b2745; color: #fff; border-radius: 8px; text-decoration: none; }
+  .menu a b { color: #ffd166; }
+  #hud { position: fixed; left: 0; right: 0; top: 0; z-index: 5; padding: 8px 10px; font: 12px/1.35 ui-monospace, Menlo, monospace; background: rgba(0,0,0,.55); pointer-events: none; white-space: pre-wrap; }
+  #back { position: fixed; left: 10px; bottom: 14px; z-index: 6; padding: 10px 14px; background: #2b2745; color: #fff; border-radius: 8px; text-decoration: none; }
+  #dot { position: fixed; z-index: 4; width: 36px; height: 36px; margin: -18px 0 0 -18px; background: #ff4f81; border: 3px solid #fff; border-radius: 50%; pointer-events: none; left: -99px; top: -99px; }
+  #field { position: fixed; inset: 0; background: repeating-linear-gradient(0deg, #14142b 0 40px, #1b1b3a 40px 80px); }
+  #wrap { position: absolute; inset: 0; overflow-y: auto; -webkit-overflow-scrolling: touch; background: repeating-linear-gradient(0deg, #14142b 0 40px, #1b1b3a 40px 80px); }
+  #content { height: calc(100% + 2px); }
+</style>
+</head>
+<body>
+<script>
+(function () {
+  var BUILD = "lab v1";
+  var q = new URLSearchParams(location.search).get("m");
+  var MODES = {
+    a: "A · как сейчас в игре: страница прокручена вниз до упора, touch-action: none",
+    b: "B · страница вообще не прокручивается (overflow hidden), touch-action: none",
+    c: "C · страница прокручена на середину, touch-action: none",
+    d: "D · страница на середине, touch-action: auto + preventDefault на touchmove",
+    e: "E · страница на середине, touch-action: auto, без preventDefault (страница может ехать)",
+    f: "F · приём из документации Telegram: внутренний скролл +2px, touch-action: auto",
+    g: "G · как F + overscroll-behavior: none"
+  };
+
+  if (!MODES[q]) {
+    var h = '<div class="menu"><h1>Тест касаний · ' + BUILD + '</h1>' +
+      '<p>Открой вариант, проведи пальцем вверх-вниз по экрану несколько раз и смотри: ' +
+      'окно браузера (с крестиком сверху) едет за пальцем? Потом вернись в меню кнопкой внизу и открой следующий.</p>';
+    Object.keys(MODES).forEach(function (k) { h += '<a href="?m=' + k + '"><b>' + MODES[k].slice(0, 1) + '</b>' + MODES[k].slice(1) + '</a>'; });
+    document.body.innerHTML = h + '</div>';
+    return;
+  }
+
+  var rootScroll = "abcde".indexOf(q) >= 0 && q !== "b";
+  var inner = q === "f" || q === "g";
+  var noneTA = "abc".indexOf(q) >= 0;
+  var useTouch = "def".indexOf(q) >= 0 || q === "g";
+  var preventing = q === "d";
+
+  var html = '<div id="hud"></div><a id="back" href="?">← меню</a><div id="dot"></div>';
+  if (inner) {
+    document.documentElement.style.cssText = "height:100%;overflow:hidden";
+    document.body.style.cssText = "height:100%;overflow:hidden";
+    html += '<div id="wrap"><div id="content"></div></div>';
+  } else {
+    if (q === "b") document.body.style.overflow = "hidden";
+    else html += '<div id="spacer" style="height:' + (innerHeight + 240) + 'px"></div>';
+    html += '<div id="field"></div>';
+  }
+  document.body.insertAdjacentHTML("beforeend", html);
+
+  var field = document.getElementById(inner ? "wrap" : "field");
+  var dot = document.getElementById("dot"), hud = document.getElementById("hud");
+  if (q === "g") { document.documentElement.style.overscrollBehavior = "none"; document.body.style.overscrollBehavior = "none"; field.style.overscrollBehavior = "none"; }
+  field.style.touchAction = noneTA ? "none" : "auto";
+
+  var moves = 0, cancels = 0, downs = 0;
+  function put(x, y) { dot.style.left = x + "px"; dot.style.top = y + "px"; moves++; }
+  if (useTouch) {
+    var opt = { passive: !preventing };
+    field.addEventListener("touchstart", function (e) { downs++; put(e.touches[0].clientX, e.touches[0].clientY); }, opt);
+    field.addEventListener("touchmove", function (e) { if (preventing && e.cancelable) e.preventDefault(); put(e.touches[0].clientX, e.touches[0].clientY); }, opt);
+    field.addEventListener("touchcancel", function () { cancels++; }, { passive: true });
+  } else {
+    field.addEventListener("pointerdown", function (e) { downs++; put(e.clientX, e.clientY); });
+    field.addEventListener("pointermove", function (e) { put(e.clientX, e.clientY); });
+    field.addEventListener("pointercancel", function () { cancels++; });
+  }
+
+  // стартовая прокрутка: A — до упора вниз, C/D/E — на середину, F/G — на 1px внутри контейнера
+  function place() {
+    if (rootScroll) {
+      var max = document.documentElement.scrollHeight - innerHeight;
+      scrollTo(0, q === "a" ? max : Math.round(max / 2));
+    }
+    if (inner) field.scrollTop = 1;
+  }
+  place(); setTimeout(place, 150); addEventListener("load", place);
+
+  function tick() {
+    var max = document.documentElement.scrollHeight - innerHeight;
+    hud.textContent = BUILD + "\n" + MODES[q] + "\nscrollY=" + Math.round(scrollY) + "/" + max +
+      (inner ? "  внутр=" + field.scrollTop : "") + "  касаний=" + downs + "  движений=" + moves + "  отмен=" + cancels;
+  }
+  setInterval(tick, 200); tick();
+})();
+</script>
+</body>
+</html>
