@@ -46,11 +46,12 @@ async function getReply(text) {
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 let busy = false;
 
-function addMsg(who, text = "") {
+// after: поставить сообщение сразу под указанным, а не в конец лога
+function addMsg(who, text = "", after = null) {
   const el = document.createElement("div");
   el.className = "msg msg--" + who;
   el.textContent = text;
-  $("log").appendChild(el);
+  if (after) after.after(el); else $("log").appendChild(el);
   $("log").scrollTop = $("log").scrollHeight;
   return el;
 }
@@ -73,11 +74,15 @@ async function typeInto(el, text) {
   }
 }
 
-// сообщения, отправленные пока бот печатает, ждут в очереди: ничего не теряется, ответы идут по порядку
+// сообщение, отправленное пока бот печатает, висит «в ожидании» (с анимацией)
+// и уходит само, когда бот допишет предыдущий ответ
 const queue = [];
 
-async function answer(text) {
-  const bot = addMsg("bot", tr("печатает..."));
+async function answer({ text, el }) {
+  el.classList.remove("msg--wait");
+  const dots = el.querySelector(".msg__dots");
+  if (dots) dots.remove();
+  const bot = addMsg("bot", tr("печатает..."), el);
   bot.classList.add("msg--typing");
   try {
     const [reply] = await Promise.all([getReply(text), sleep(700)]);
@@ -100,8 +105,12 @@ async function drain() {
 function send(text) {
   text = text.trim();
   if (!text) return;
-  addMsg("me", text);
-  queue.push(text);
+  const el = addMsg("me", text);
+  if (busy) {
+    el.classList.add("msg--wait");
+    el.insertAdjacentHTML("beforeend", '<span class="msg__dots" aria-hidden="true"><i></i><i></i><i></i></span>');
+  }
+  queue.push({ text, el });
   drain();
 }
 

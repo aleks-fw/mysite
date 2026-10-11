@@ -330,6 +330,14 @@ h1 { font-weight: 800; font-size: clamp(38px, 4.7vw, 84px); line-height: 1.12; l
 .msg--bot { align-self: flex-start; background: var(--bg2); }
 .msg--me { align-self: flex-end; background: var(--pink); border-color: var(--pink); color: var(--on-pink); }
 .msg--typing { color: var(--muted); }
+/* сообщение «в ожидании»: бот ещё печатает предыдущий ответ; три пикселя мигают по очереди */
+.msg--wait { opacity: .65; border-style: dashed; }
+.msg__dots { display: inline-flex; gap: 3px; margin-left: 8px; vertical-align: middle; }
+.msg__dots i { width: 5px; height: 5px; background: currentColor; opacity: .3; animation: msgdot 1.2s steps(1) infinite; }
+.msg__dots i:nth-child(2) { animation-delay: .2s; }
+.msg__dots i:nth-child(3) { animation-delay: .4s; }
+@keyframes msgdot { 0%, 100% { opacity: .3; } 15%, 50% { opacity: 1; } }
+@media (prefers-reduced-motion: reduce) { .msg__dots i { animation: none; opacity: .6; } }
 .chat__quick { display: flex; flex-wrap: wrap; gap: 8px; padding: 0 16px 12px; }
 .chip { background: transparent; color: var(--text); border: 2px solid var(--line); padding: 5px 12px; font-family: var(--sans); font-size: 15px; cursor: pointer; }
 .chip:hover { background: var(--block); color: #fff; }
