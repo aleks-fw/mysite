@@ -8,20 +8,18 @@
   const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
   const A = () => root.NyanAudio, snd = (n) => { const a = A(); if (a) a.sfx(n); };
   const inGame = () => location.hash === "#/game";
-  const HINTS = [[0.2, "Веди мышью или пальцем: корабль летит за курсором"], [4.2, "Стрельба автоматическая"], [7.5, "ЛКМ или R: ракета (перезарядка 25 с)"]];
 
   function create(o) {
     const { eng, world, ui, canvas } = o, T = eng.THREE;
     let save = o.save, stats = L.deriveStats(save.tal);
     const ray = new T.Raycaster(), plane = new T.Plane(new T.Vector3(0, 1, 0), 0), ndc = new T.Vector2(), hit = new T.Vector3();
     const target = { x: 0, z: 2 }, keys = {};
-    let state = "idle", r = null, over = false, tutDone = false, bosses = null;
+    let state = "idle", r = null, over = false, bosses = null;
     const dbgFlags = { noSpawn: false };
-    try { tutDone = localStorage.getItem("nyan-game-tut") === "1"; } catch (e) {}
 
     function fresh() {
       return { hp: stats.maxHp, score: 0, bits: 0, cores: 0, time: 0, combo: 0, comboT: 0, fireT: 0, inv: 0, bomb: stats.startBombs, lastWave: 0,
-        shieldT: 0, revivesLeft: stats.revives, count: 3, countN: 4, warp: 0, hintT: 0, hintI: 0,
+        shieldT: 0, revivesLeft: stats.revives, count: 3, countN: 4, warp: 0,
         enemies: [], shots: [], picks: [], coins: [], ebullets: [], rockets: [], rocketStock: stats.rocketCharges, rocketCd: 0, spawner: L.createSpawner(Math.random) };
     }
 
@@ -154,7 +152,6 @@
         if (r.count <= 0) { r.inv = 2; if (A()) A().setLevel(0); }
         pushUi(); return;
       }
-      if (!tutDone) { r.hintT += dt; if (r.hintI < HINTS.length && r.hintT >= HINTS[r.hintI][0]) { ui.hint(HINTS[r.hintI][1]); r.hintI++; if (r.hintI === HINTS.length) { tutDone = true; try { localStorage.setItem("nyan-game-tut", "1"); } catch (e) {} } } }
       if (r.warp > 0) { r.warp -= dt; const t = 2.6 - Math.max(0, r.warp), sm = (x) => { x = clamp(x, 0, 1); return x * x * (3 - 2 * x); }; world.setWarp(sm(t / 0.5) * (1 - sm((t - 2.0) / 0.6))); r.inv = Math.max(r.inv, 0.3); if (r.warp <= 0) world.setWarp(0); }
       r.time += dt; r.inv = Math.max(0, r.inv - dt); r.comboT -= dt; if (r.comboT <= 0) r.combo = 0;
       if (stats.shieldCd > 0) { if (r.shieldT > 0) r.shieldT = Math.max(0, r.shieldT - dt); world.setShield(r.shieldT <= 0); } else world.setShield(false);

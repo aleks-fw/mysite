@@ -11,7 +11,8 @@
 .gbtn:hover:not(:disabled) { transform: translate(-1px, -1px); } .gbtn:active:not(:disabled) { transform: translate(3px, 3px); box-shadow: 1px 1px 0 var(--ink-d); }
 .gbtn:disabled { opacity: .45; cursor: not-allowed; } .gbtn--big { width: 100%; font-size: 18px; padding: 14px; margin: 14px 0 8px; } .gbtn--sm { padding: 6px 10px; font-size: 12px; } .gbtn--ghost { background: transparent; color: #fff; box-shadow: none; border-color: var(--line); }
 .gbtn:focus-visible, .hud__bomb:focus-visible { outline: 3px solid var(--orange); outline-offset: 2px; }
-.game__hud { position: absolute; inset: 0; pointer-events: none; font: 700 14px var(--mono); color: #fff; text-shadow: 2px 2px 0 #000; display: flex; gap: 18px; padding: 12px 16px; align-items: flex-start; flex-wrap: wrap; }
+.game__hud { position: absolute; inset: 0; pointer-events: none; font: 700 14px var(--mono); color: #fff; text-shadow: 2px 2px 0 #000; display: flex; gap: 18px; padding: 12px 16px; align-items: flex-start; align-content: flex-start; flex-wrap: wrap; }
+@media (max-width: 600px) { .game__hud { gap: 8px; padding: 12px 64px 12px 12px; font-size: 12px; } .game__hud .hud__cell { padding: 3px 6px; } }
 .hud__bomb { pointer-events: auto; position: absolute; right: 14px; bottom: 14px; width: 64px; height: 64px; border: 3px solid #fff; background: var(--pink); } .hud__bomb { font: 800 22px var(--mono); color: var(--on-pink); } .hud__bomb::after { content: "B" attr(data-n); }
 .game__banner { position: absolute; left: 0; right: 0; top: 30%; text-align: center; font: 800 clamp(28px, 7vw, 56px) var(--sans); color: #fff; opacity: 0; pointer-events: none; } .game__banner.on { animation: bannerIn 1.6s ease both; }
 .game__flash { position: absolute; inset: 0; background: #fff; opacity: 0; pointer-events: none; } .game__flash.on { animation: flashOut .35s ease-out both; }
@@ -125,11 +126,8 @@
 /* отсчёт и подсказки первого забега */
 .game__count { position: absolute; left: 0; right: 0; top: 34%; text-align: center; font: 800 clamp(64px, 16vw, 130px)/1 var(--sans); color: #fff; text-shadow: 4px 4px 0 #000; pointer-events: none; opacity: 0; }
 .game__count.on { animation: countPop .85s ease-out both; }
-.game__hint { position: absolute; left: 50%; top: 25%; max-width: calc(100% - 28px); translate: -50% 0; padding: 10px 16px; background: rgba(11,11,26,.82); border: 2px solid var(--orange); color: #fff; font: 700 clamp(12px, 3.2vw, 15px) var(--mono); text-align: center; opacity: 0; pointer-events: none; }
-.game__hint.on { animation: hintIn 3.8s ease both; }
 @keyframes countPop { 0% { opacity: 0; transform: scale(1.7); } 20% { opacity: 1; transform: scale(1); } 80% { opacity: 1; } 100% { opacity: 0; transform: scale(.9); } }
-@keyframes hintIn { 0% { opacity: 0; transform: translateY(10px); } 10%, 85% { opacity: 1; transform: none; } 100% { opacity: 0; } }
-@media (prefers-reduced-motion: reduce) { .game__count.on, .game__hint.on { animation-duration: .01s; animation-fill-mode: both; } }
+@media (prefers-reduced-motion: reduce) { .game__count.on { animation-duration: .01s; animation-fill-mode: both; } }
 
 /* лобби с деревом талантов */
 .game__lobby { width: min(1000px, calc(100% - 24px)); display: grid; grid-template-columns: 290px 1fr; gap: 20px; align-items: start; overflow: hidden; max-height: calc(100% - 20px); }

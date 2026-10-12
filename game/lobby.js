@@ -156,7 +156,6 @@
     snd.addEventListener("click", () => { root.NyanAudio.toggleMute(); syncSnd(); }); S.stage.appendChild(snd); S.syncSnd = syncSnd; syncSnd();
     const hurt = mk("div", "game__hurt"); S.hurtEl = hurt; S.stage.appendChild(hurt);
     const cnt = mk("div", "game__count"); S.cnt = cnt; S.stage.appendChild(cnt);
-    const hint = mk("div", "game__hint"); S.hintEl = hint; S.stage.appendChild(hint);
     const toast = mk("div", "game__toast"); S.toast = toast;
     const rk = mk("button", "hud__rocket", "", { type: "button", id: "hudRocket", "aria-label": "Ракета" });
     rk.append(mk("img", "", null, { src: root.NyanWorld.iconURL("rocket"), alt: "", width: 28, height: 28 }), mk("b", "", "")); rk.addEventListener("click", () => S.play.fireRocket()); S.rocketBtn = rk;
@@ -176,7 +175,6 @@
       },
       sound() { S.syncSnd(); },
       count(n) { const c = S.cnt; if (n === 0 && !c.textContent) return; c.textContent = n > 0 ? String(n) : t("Вперёд!"); c.classList.remove("on"); void c.offsetWidth; c.classList.add("on"); if (n === 0) setTimeout(() => { c.textContent = ""; }, 700); },
-      hint(text) { const h2 = S.hintEl; h2.textContent = t(text); h2.classList.remove("on"); void h2.offsetWidth; h2.classList.add("on"); },
       hurt() { S.hurtEl.classList.remove("on"); void S.hurtEl.offsetWidth; S.hurtEl.classList.add("on"); },
       pop(x, y, text) { const e = mk("span", "game__pop", text); e.style.left = x + "px"; e.style.top = y + "px"; S.stage.appendChild(e); setTimeout(() => e.remove(), 800); const pops = S.stage.querySelectorAll(".game__pop"); if (pops.length > 14) pops[0].remove(); },
       pickup(type, extra) { const tt = S.toast; tt.replaceChildren(mk("img", "", null, { src: root.NyanWorld.iconURL(TICON[type]), alt: "", width: 36, height: 36 }), mk("span", "", t(TOAST[type]) + (extra ? " " + extra : ""))); tt.style.setProperty("--tc", TCOL[type]); tt.classList.remove("on"); void tt.offsetWidth; tt.classList.add("on"); },
