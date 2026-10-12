@@ -127,7 +127,9 @@ function openChat(e) {
     typeInto(addMsg("bot"), tr("Привет! Я ИИ-помощник. Спроси про сайт, музыку или как связаться с оператором.")).then(() => { busy = false; drain(); });
   }
   fitChat();
-  $("input").focus();
+  // на телефоне поле в фокусе сразу поднимало бы клавиатуру и закрывало чат: фокус на окно, поле — по тапу
+  if (window.matchMedia("(pointer: coarse)").matches) { const d = document.querySelector("#modal .chat"); d.tabIndex = -1; d.focus({ preventScroll: true }); }
+  else $("input").focus();
 }
 let chatOpener = null;
 function closeChat() {
