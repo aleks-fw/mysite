@@ -11,6 +11,11 @@
 
   function create(o) {
     const { eng, world, ui, canvas } = o, T = eng.THREE;
+    // на узком (телефонном) экране поле шире кадра: границу корабля сужаем до края видимой области на ближней линии
+    const bx = () => {
+      const c = eng.camera, depth = (169 + (B.zMax - 9) * -13) / Math.hypot(13, 13);
+      return Math.max(3.5, Math.min(B.x, Math.tan(c.fov * Math.PI / 360) * c.aspect * depth - 1.1));
+    };
     let save = o.save, stats = L.deriveStats(save.tal);
     const ray = new T.Raycaster(), plane = new T.Plane(new T.Vector3(0, 1, 0), 0), ndc = new T.Vector2(), hit = new T.Vector3();
     const target = { x: 0, z: 2 }, keys = {};
@@ -31,7 +36,7 @@
       ndc.set(((e.clientX - b.left) / b.width) * 2 - 1, -((e.clientY - b.top) / b.height) * 2 + 1);
       ray.setFromCamera(ndc, eng.camera);
       if (!ray.ray.intersectPlane(plane, hit)) return;
-      target.x = clamp(hit.x, -B.x, B.x);
+      target.x = clamp(hit.x, -bx(), bx());
       target.z = clamp(hit.z - (e.pointerType === "touch" ? 2 : 0), B.zMin, B.zMax);
     }
     const GAME_KEYS = ["KeyR", "KeyM", "ArrowLeft", "ArrowRight", "ArrowUp", "ArrowDown", "KeyA", "KeyD", "KeyW", "KeyS", "Space", "Escape"];
@@ -134,7 +139,7 @@
       const s = world.ship, px = s.position.x;
       const dx = (keys.ArrowRight || keys.KeyD ? 1 : 0) - (keys.ArrowLeft || keys.KeyA ? 1 : 0);
       const dz = (keys.ArrowDown || keys.KeyS ? 1 : 0) - (keys.ArrowUp || keys.KeyW ? 1 : 0);
-      target.x = clamp(target.x + dx * KEYS_V * dt, -B.x, B.x); target.z = clamp(target.z + dz * KEYS_V * dt, B.zMin, B.zMax);
+      target.x = clamp(target.x + dx * KEYS_V * dt, -bx(), bx()); target.z = clamp(target.z + dz * KEYS_V * dt, B.zMin, B.zMax);
       const k = 1 - Math.exp(-stats.follow * dt);
       s.position.x += (target.x - px) * k; s.position.z += (target.z - s.position.z) * k;
       world.setShipTilt((s.position.x - px) / dt);

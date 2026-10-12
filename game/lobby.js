@@ -167,7 +167,7 @@
         put("hudHp", s.maxHp > 10 ? "♥︎ " + Math.max(0, s.hp) + "/" + s.maxHp : "♥︎".repeat(Math.max(0, s.hp)) + "·".repeat(Math.max(0, s.maxHp - s.hp))); put("hudCombo", s.combo > 1 ? "x" + s.combo : "");
         put("hudBits", t("БИТЫ") + " " + s.bits); put("hudCores", s.cores ? t("ЯДРА") + " " + s.cores : "");
         const b = document.getElementById("hudBomb"); b.hidden = !s.bomb; if (S.last.bn !== s.bomb) { S.last.bn = s.bomb; b.dataset.n = s.bomb > 1 ? "×" + s.bomb : ""; }
-        { const cd = s.rocketCd, rb = S.rocketBtn, key = s.rocketStock >= s.rocketMax ? -1 : Math.ceil(cd), lab = s.rocketStock > 0 ? (s.rocketMax > 1 ? "×" + s.rocketStock : "ЛКМ") : key + "c";
+        { const cd = s.rocketCd, rb = S.rocketBtn, key = s.rocketStock >= s.rocketMax ? -1 : Math.ceil(cd), lab = s.rocketStock > 0 ? (s.rocketMax > 1 ? "×" + s.rocketStock : (root.matchMedia("(pointer: coarse)").matches ? "" : "ЛКМ")) : key + "c";
           if (S.last.rk !== lab) { S.last.rk = lab; rb.classList.toggle("ready", s.rocketStock > 0); rb.lastChild.textContent = lab; }
           rb.style.setProperty("--p", s.rocketStock > 0 ? "100%" : Math.round((1 - cd / s.rocketCdMax) * 100) + "%"); }
         { const sc = S.shieldChip, on = s.shield >= 0; if (sc.chip.hidden === on) sc.chip.hidden = !on;
