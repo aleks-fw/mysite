@@ -351,6 +351,8 @@ const navLinks = [...document.querySelectorAll(".nav__a")];
 const TITLES = { home: "NYAN", portfolio: "Портфолио — NYAN", mcp: "MCP — NYAN", support: "Поддержка — NYAN", game: "Игра — NYAN" };
 let view = "home";
 
+// хеш из адресной строки может быть невалидным селектором (#a[) — querySelector бросил бы SyntaxError
+function safeQuery(sel) { try { return document.querySelector(sel); } catch (e) { return null; } }
 const routeFromHash = () => {
   const m = /^#\/(portfolio|mcp|support|game)$/.exec(location.hash);
   return m ? m[1] : "home";
@@ -387,7 +389,7 @@ function applyRoute(initial) {
   document.querySelectorAll(".view").forEach((el) => { el.hidden = el.dataset.view !== v; });
   document.title = tr(TITLES[v]);
   if (changed) {
-    const anchor = v === "home" && location.hash.length > 1 && location.hash !== "#top" && !location.hash.startsWith("#/") ? document.querySelector(location.hash) : null;
+    const anchor = v === "home" && location.hash.length > 1 && location.hash !== "#top" && !location.hash.startsWith("#/") ? safeQuery(location.hash) : null;
     if (anchor) anchor.scrollIntoView({ behavior: "instant" });
     else window.scrollTo({ top: 0, behavior: "instant" });
     if (!initial) {
